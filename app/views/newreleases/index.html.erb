@@ -1,0 +1,30 @@
+<div>
+  <p id="notice"><%= notice %></p>
+</div>
+<hr>
+<div>
+  <h1>New Releases</h1>
+</div>
+<hr>
+<div>
+  <h2>Current New Releases</h2>
+  <table> 
+    <tr>
+      <th>Item Code</th>
+      <th>Discount Code</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Vendor</th>
+    </tr>
+    <% @newreleases.each do |issue| %>
+    <tr>
+      <td><%= link_to issue.item_code, newrelease_path(issue) %></td>
+      <td><%= issue.discount_code %></td>
+      <td><%= issue.title %></td>
+      <td><%= issue.price %></td>
+      <td><%= issue.vendor %></td>
+    </tr>
+
+    <% end %>
+  </table>
+</div>

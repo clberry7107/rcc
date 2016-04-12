@@ -1,0 +1,47 @@
+<div>
+  <p id="notice"><%= notice %></p>
+</div>
+<div>
+  <h1>New Series Details</h1>
+</div>
+<div>
+  <table>
+    <tr>
+      <td>Vender Name</td>
+      <td><%= @newseries.vendor_name %></td>
+    </tr>
+    <tr>
+      <td>Item Number</td>
+      <td><%= @newseries.item_number %></td>
+    </tr>
+    <tr>
+      <td>Discount Code</td>
+      <td><%= @newseries.discount_code %></td>
+    </tr>
+    <tr>
+      <td>Preview Page Number</td>
+      <td><%= @newseries.preview_page_no %></td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td><%= @newseries.description %></td>
+    </tr>
+    <tr>
+      <td>Price</td>
+      <td><%= @newseries.f_price %></td>
+    </tr>
+    <tr>
+      <td>Suggested Retail Price</td>
+      <td><%= @newseries.srp %></td>
+    </tr>
+    <tr>
+      <td>Last Updated</td>
+      <td><%= @newseries.updated_at %></td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <%= link_to 'Edit', edit_newseries_path(@newseries) %> |
+  <%= link_to 'Back', newseries_index_path %>
+</div>

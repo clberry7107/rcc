@@ -1,0 +1,35 @@
+<div>
+  <p id="notice"><%= notice %></p>
+</div>
+<div class="row">
+  <hr>
+  <div>
+    <h2>Current Subscribers</h2>
+    <h3>Total Subscribers: <%= @subscribers.count %></h3>
+    <h4><%= link_to "Add Subscriber", new_subscriber_path %></h4>
+      <table> 
+      <tr>
+        <th>Name Index</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+        
+      </tr>
+      <% @subscribers.each do |subscriber| %>
+      <tr>
+        <td><%= subscriber.index %></td>
+        <td><%= link_to subscriber.full_name, subscriber_path(subscriber) %></td>
+        <td><%= subscriber.address %></td>
+        <td><%= subscriber.city %></td>
+        <td><%= subscriber.state %></td>
+        <td><%= subscriber.f_zip %></td>
+      </tr>
+  
+      <% end %>
+    </table>
+  </div>
+</div>
+
+

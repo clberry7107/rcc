@@ -1,0 +1,22 @@
+<div class="row">
+  <hr/>
+  <h2>Current Order Count</h2>
+  <h3>Book Titles: <%= @books.count %></h3>
+  <h3>Total Books: <%= @total_quantity %></h3>
+  <table> 
+    <tr>
+      <th>Title</th>
+      <th>Order Quantity</th>
+      <th>Notes</th>
+      <th>Active</th>
+    </tr>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= link_to book.title, book_path(book) %></td>
+        <th><%= book.order_quantity %></th>
+        <td><%= book.notes %></td>
+        <td><%= book.active %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

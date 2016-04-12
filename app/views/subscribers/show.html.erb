@@ -1,0 +1,81 @@
+<div>
+  <p id="notice"><%= notice %></p>
+</div>
+<div class="row">
+  <hr/>
+  <h1>Subscriber Details</h1>
+  <h4><%= link_to "Previous", subscriber_path(@subscriber.previous_subscriber) unless @subscriber.previous_subscriber == @subscriber.id %> |
+  <%= link_to "Next", subscriber_path(@subscriber.next_subscriber) unless @subscriber.next_subscriber == @subscriber.id%></h4>
+  <div>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td><%= @subscriber.full_name %></td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td><%= @subscriber.address %></td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td><%= @subscriber.city %></td>
+      </tr>
+      <tr>
+        <td>Zip</td>
+        <td><%= @subscriber.zip %></td>
+      </tr>
+      <tr>
+        <td>Home Phone</td>
+        <td><%= @subscriber.f_home_phone %></td>
+      </tr>
+      <tr>
+        <td>Work Phone</td>
+        <td><%= @subscriber.f_work_phone %></td>
+      </tr>
+      <tr>
+        <td>Start Date</td>
+        <td><%= @subscriber.start_date %></td>
+      </tr>
+      <tr>
+        <td>Mailing List</td>
+        <td><%= @subscriber.mail_list %></td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td><%= @subscriber.subscriber_type %></td>
+      </tr>
+      <tr>
+        <td>Last Updated</td>
+        <td><%= @subscriber.updated_at %></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <h4>
+      <%= link_to 'Edit', edit_subscriber_path(@subscriber) %> |
+      <%= link_to 'Back', subscribers_path %>
+    </h4>
+  </div>
+  <hr/>
+  <div>
+    <h2>Current Subscriptions</h2>
+    <h4>Subscription count: <%= @subscriber.books.count %><br/></h4>
+    <h5><%= link_to "Edit Subscriptions", subscriber_edit_subscriptions_path(:id => @subscriber.id) %></h5>
+    <div>
+      <table>
+        <tr>
+          <th>Book Name</th>
+          <th>Quantity</th>
+        </tr>
+        <% @subscriber.books.order(:title).each do |book| %>
+          <tr>
+            <td><%= link_to book.title, book_path(book) %></td>
+            <td><%= @subscriber.book_quantity(book) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+
+

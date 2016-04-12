@@ -1,0 +1,20 @@
+  <tr>
+    <td><%= @book.title %></td>
+    <td><%= @book.order_quantity %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><table>
+      <% @book.subscribers.order(:last_name).each do |subscriber| %>
+        <% if subscriber.book_quantity(@book) > 0 %>
+          <tr>
+            <td><%= subscriber.full_name %></td>
+            <td><%= subscriber.book_quantity(@book) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table></td>
+  </tr>
+  

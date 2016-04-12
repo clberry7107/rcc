@@ -1,0 +1,32 @@
+<div>
+  <p id="notice"><%= notice %></p>
+</div>
+<hr>
+<div>
+  <h1>New Series</h1>
+</div>
+<hr>
+<div>
+  <h2>Current New Series</h2>
+  <table> 
+    <tr>
+      <th>Vendor Name</th>
+      <th>Item Code</th>
+      <th>Discout Code</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Suggested Retail Price</th>
+    </tr>
+    <% @newseries.each do |issue| %>
+    <tr>
+      <td><%= issue.vendor_name %></td>
+      <td><%= link_to issue.item_number, newseries_path(issue) %></td>
+      <td><%= issue.discount_code %></td>
+      <td><%= issue.description %></td>
+      <td><%= issue.f_price %></td>
+      <td><%= issue.f_srp %></td>
+    </tr>
+
+    <% end %>
+  </table>
+</div>

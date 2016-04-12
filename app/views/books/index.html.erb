@@ -1,0 +1,33 @@
+<div>
+  <p id="notice"><%= notice %></p>
+</div>
+<div class="row">
+  <hr/>
+  <div>
+    <h2>Current Book List</h2>
+    <h3>Total Books: <%= @books.count %></h3>
+    <h4><%= link_to "Add Book", new_book_path %> </h4>
+    <table> 
+      <tr>
+        <th>Title</th>
+        <th>Book Index</th>
+        <th>Subscriber Count</th>
+        <th>Order Quantity</th>
+        <th>Notes</th>
+        <th>Active</th>
+      </tr>
+      <% @books.each do |book| %>
+        <tr>
+          <td><%= link_to book.title, book_path(book) %></td>
+          <td><%= book.index %></td>
+          <th><%= book.subscribers.count %></th>
+          <th><%= book.order_quantity %></th>
+          <td><%= book.notes %></td>
+          <td><%= book.active %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+</div>
+

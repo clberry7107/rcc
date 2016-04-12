@@ -1,0 +1,18 @@
+<tr>
+  <td><%= @subscriber.full_name %></td>
+  <td><%= @subscriber.total_books %></td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td><table>
+    <% @subscriber.books.order(:title).each do |book| %>
+      <% if @subscriber.book_quantity(book) > 0 %>
+        <tr>
+          <td><%= book.title %></td>
+          <td><%= @subscriber.book_quantity(book) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table></td>
+</tr>

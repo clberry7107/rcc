@@ -1,0 +1,26 @@
+<div>
+  <p id="notice"><%= notice %></p>
+</div>
+<hr>
+<div>
+  <h2>Current Relationships</h2>
+  <h3>Relationship Count: <%= @relationships.count %></h3>
+  <table> 
+    <tr>
+      <th>Book Index</th>
+      <th>Name Index</th>
+      <th>Quantity</th>
+      <th>Date Input</th>
+    </tr>
+    <% @relationships.each do |relationship| %>
+    <tr>
+      <td><%= link_to relationship.book_index, book_path(relationship.book_id) %></td>
+      <td><%= link_to relationship.name_index, subscriber_path(relationship.subscriber_id) %></td>
+      <td><%= relationship.quantity %></td>
+      <td><%= relationship.date_added %></td>
+      <td><%= link_to "Delete", relationship_path(relationship), method: :delete %></td>
+    </tr>
+
+    <% end %>
+  </table>
+</div>

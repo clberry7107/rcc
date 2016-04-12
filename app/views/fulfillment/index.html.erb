@@ -1,0 +1,38 @@
+<div class="row">
+  <hr/>
+  <div>
+    <h3>Order Fulfillment</h3>
+  </div>
+  <div>
+    <br>
+    <h4>Subscriber Count: <%= @subscribers.count %></h4>
+    <h4>Book Count: <%= @books.count %></h4>
+  </div>
+  <hr/>
+  <div>
+    <ul class="tabs" data-tabs id="fulfillment-tabs">
+      <li class="tabs-title is-active"><a href="#bybook" aria-selected="true">By Book</a></li>
+      <li class="tabs-title"><a href="#bysubscriber">By Subscriber</a></li>
+    </ul>
+    <div class="tabs-content" data-tabs-content="fulfillment-tabs">
+      <div class="tabs-panel is-active" id="bybook">
+        <table>
+          <%= render 'fulfillment/bybook_header' %>
+          <% @books.each do |book| %>
+            <% @book = book %>
+            <%= render partial: 'fulfillment/bybook', object: @book %>
+          <% end %>
+       </table>
+      </div>
+      <div class="tabs-panel" id="bysubscriber">
+        <table>
+          <%= render 'fulfillment/bysubscriber_header' %>
+          <% @subscribers.each do |subscriber| %>
+            <% @subscriber = subscriber %>
+            <%= render partial: 'fulfillment/bysubscriber', object: @subscriber %>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

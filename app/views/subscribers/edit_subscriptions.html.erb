@@ -1,0 +1,28 @@
+<div class="row">
+  <hr/>
+  <h1>Edit Subcriptions for <%= @subscriber.full_name %></h1>
+  <h3>Book Count: <%= @subscriber.books.count %></h3>
+  <h3><%= link_to "Add Book", {:controller => "subscriptions", :action => "new", :subscriber => @subscriber.id} %></h3>
+  <%= form_tag("/subscriptions/update", method: "post") do %>
+    <%= hidden_field_tag(:subscriber_id, @subscriber.id) %>
+  </div>
+  <hr/>
+  <div class="large-2 columns">
+    <%= submit_tag "Commit Changes", :class => 'success button' %>
+    <% end %>
+  </div>
+  <div class="large-10 columns">
+    <table> 
+      <tr>
+        <th>Order Quantity</th>
+        <th>Title</th>
+      </tr>
+      <% @subscriber.books.order(:title).each do |book| %>
+        <tr>
+          <td><%= label_tag(:q, "Quantity:") %>
+              <%= number_field(:q, book.id, :step => 1, :min => 0, :value => @subscriber.book_quantity(book)) %></td>
+          <td><%= link_to book.title, book_path(book) %></td>
+      <% end %>
+    </table>
+  </div>
+</div>
