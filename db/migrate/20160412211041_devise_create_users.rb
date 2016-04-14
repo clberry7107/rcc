@@ -14,7 +14,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :address2
       t.string :city
       t.string :state
-      t.string :zip
+
       
       ## Recoverable
       t.string   :reset_password_token

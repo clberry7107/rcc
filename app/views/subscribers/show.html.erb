@@ -4,8 +4,8 @@
 <div class="row">
   <hr/>
   <h1>Subscriber Details</h1>
-  <h4><%= link_to "Previous", subscriber_path(@subscriber.previous_subscriber) unless @subscriber.previous_subscriber == @subscriber.id %> |
-  <%= link_to "Next", subscriber_path(@subscriber.next_subscriber) unless @subscriber.next_subscriber == @subscriber.id%></h4>
+  <h4><%= link_to "Previous", subscriber_path(@subscriber.previous_subscriber)  %> |
+  <%= link_to "Next", subscriber_path(@subscriber.next_subscriber) %></h4>
   <div>
     <table>
       <tr>
@@ -22,7 +22,7 @@
       </tr>
       <tr>
         <td>Zip</td>
-        <td><%= @subscriber.zip %></td>
+        <td><%= @subscriber.f_zip %></td>
       </tr>
       <tr>
         <td>Home Phone</td>

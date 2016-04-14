@@ -40,5 +40,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   
   # Devise said this should be here
-  config.action_mailer.default_url_options = { host: '$IP', port: $PORT }
+  config.action_mailer.default_url_options = { host: 'ide.c9.io/clberry7107/csv-foundation', port: $PORT }
 end

@@ -1,0 +1,66 @@
+<div>
+  <p id="notice"><%= notice %></p>
+</div>
+<div class="row">
+  <hr/>
+  <h1>Details for <%= @user.email %></h1>
+  <h4><%= link_to "Previous", user_path(@user.previous_user) %> |
+  <%= link_to "Next", user_path(@user.next_user) %></h4>
+  <div>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td><%= @user.full_name %></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>Address 1</td>
+        <td><%= @user.address1 %></td>
+      </tr>
+        <td>Address 2</td>
+        <td><%= @user.address2 %></td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td><%= @user.city %></td>
+      </tr>
+      <tr>
+        <td>State</td>
+        <td><%= @user.state %></td>
+      </tr>
+      <tr>
+        <td>Zip</td>
+        <td><%= @user.zip %></td>
+      </tr>
+      <tr>
+        <td>Home Phone</td>
+        <td><%= @user.f_home_phone %></td>
+      </tr>
+      <tr>
+        <td>Work Phone</td>
+        <td><%= @user.f_work_phone %></td>
+      </tr>
+      <tr>
+        <td>Mobile Phone</td>
+        <td><%= @user.f_mobile_phone %></td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td><%= @user.user_type %></td>
+      </tr>
+      <tr>
+        <td>Last Updated</td>
+        <td><%= @user.updated_at %></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <h4>
+      <%= link_to 'Edit', edit_user_path(@user) %> |
+      <%= link_to 'Back', users_path %>
+    </h4>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 class SubscribersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_subscriber, only: [:show, :edit, :edit_subscriptions, :update, :destroy]
 
 
@@ -84,6 +85,6 @@ class SubscribersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subscriber_params
-      params.permit(:subscriber, {})
+      params.require(:subscriber).permit(:first_name,:last_name,:address,:city,:state,:zip,:home_phone,:work_phone,:mobile_phone,:mail_list,:subscriber_type)
     end
 end

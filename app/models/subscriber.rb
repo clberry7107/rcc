@@ -2,6 +2,18 @@ class Subscriber < ActiveRecord::Base
   has_many :subscribers_books
   has_many :books, through: :subscribers_books
   
+  before_validation(on: :update) do
+    self.home_phone = home_phone.gsub(/[^0-9]/, "")
+    self.work_phone = work_phone.gsub(/[^0-9]/, "")
+    self.zip = zip.gsub(/[^0-9]/,"")
+  end
+  
+  before_validation(on: :create) do
+    self.home_phone = home_phone.gsub(/[^0-9]/, "")
+    self.work_phone = work_phone.gsub(/[^0-9]/, "")
+    self.zip = zip.gsub(/[^0-9]/,"")
+  end
+  
   def self.remove_newline(value)
     if !value.chr.is_number? 
       value = value.gsub!("\n", ", ") unless value.include?("\"")
@@ -52,11 +64,11 @@ class Subscriber < ActiveRecord::Base
   end
   
   def next_subscriber
-    self.id == Subscriber.last.id ? (self.id) : (Subscriber.where("id > ?", self.id).first)
+    self.id == Subscriber.last.id ? (Subscriber.first.id) : (Subscriber.where("id > ?", self.id).first)
   end
   
   def previous_subscriber
-    self.id == Subscriber.first.id ? (self.id) : (Subscriber.where("id < ?", self.id).last)
+    self.id == Subscriber.first.id ? (Subscriber.last.id) : (Subscriber.where("id < ?", self.id).last)
   end
   
   def f_home_phone
@@ -68,6 +80,7 @@ class Subscriber < ActiveRecord::Base
   end
     
   def f_number(num_array)
+    return nil unless num_array.length > 0
     return "(#{num_array[0..2].join}) #{num_array[3..5].join}-#{num_array[6..9].join}"
   end
   
@@ -82,5 +95,6 @@ class Subscriber < ActiveRecord::Base
   
   def total_books
     Relationship.where("name_index = ?", self.index).sum(:quantity)
+    
   end
 end

@@ -7,11 +7,11 @@
     <td></td>
     <td></td>
     <td><table>
-      <% @book.subscribers.order(:last_name).each do |subscriber| %>
-        <% if subscriber.book_quantity(@book) > 0 %>
+      <% @book.subscribers.each do |subscriber| %>
+        <% if (@q = subscriber.book_quantity(@book)) > 0 %>
           <tr>
             <td><%= subscriber.full_name %></td>
-            <td><%= subscriber.book_quantity(@book) %></td>
+            <td><%= @q %></td>
           </tr>
         <% end %>
       <% end %>

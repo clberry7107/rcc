@@ -1,0 +1,69 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <table>
+      <tr>
+        <td><%= f.label "Email:" %></td>
+        <td><%= f.text_field :email %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "First Name:" %></td>
+        <td><%= f.text_field :f_name %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Last Name:" %></td>
+        <td><%= f.text_field :l_name %></td>
+      </tr>
+      <tr>
+      <tr>
+        <td><%= f.label "Address 1:" %></td>
+        <td><%= f.text_field :address1 %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Address 2:" %></td>
+        <td><%= f.text_field :address2 %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "City:" %></td>
+        <td><%= f.text_field :city %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "State:" %></td>
+        <td><%= f.text_field :state %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Zip:" %></td>
+        <td><%= f.text_field :zip %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Home Phone:" %></td>
+        <td><%= f.telephone_field :home_phone %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Work Phone:" %></td>
+        <td><%= f.text_field :work_phone %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Mobile Phone:" %></td>
+        <td><%= f.text_field :mobile_phone %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Type:" %></td>
+        <td><%= f.text_field :user_type %></td>
+      </tr>
+    </table>
+  </div>
+
+    <%= f.submit "Commit", :class => "button success" %>
+  
+<% end %>
