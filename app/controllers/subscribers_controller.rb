@@ -17,7 +17,7 @@ class SubscribersController < ApplicationController
   # GET /subscribers/1
   # GET /subscribers/1.json
   def show
-    @last = Subscriber.last.id
+    @subscribers = Subscriber.all.order(:last_name)
   end
 
   # GET /subscribers/new

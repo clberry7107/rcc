@@ -64,11 +64,15 @@ class Subscriber < ActiveRecord::Base
   end
   
   def next_subscriber
-    self.id == Subscriber.last.id ? (Subscriber.first.id) : (Subscriber.where("id > ?", self.id).first)
+    subs = Subscriber.order(:last_name).to_a
+    sub = subs.index(self) + 1
+    sub > subs.length - 1 ? subs.first.id : subs[sub].id
   end
   
   def previous_subscriber
-    self.id == Subscriber.first.id ? (Subscriber.last.id) : (Subscriber.where("id < ?", self.id).last)
+    subs = Subscriber.order(:last_name).to_a
+    sub = subs.index(self) - 1
+    sub > subs.length - 1 ? subs.first.id : subs[sub].id
   end
   
   def f_home_phone

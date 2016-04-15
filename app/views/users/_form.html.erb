@@ -2,7 +2,6 @@
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
       <ul>
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,8 +12,8 @@
   <div>
     <table>
       <tr>
-        <td><%= f.label "Email:" %></td>
-        <td><%= f.text_field :email %></td>
+        <td><%= f.label "Email and Password" %></td>
+        <td><%= link_to "Edit Details", edit_user_registration_path %></td>
       </tr>
       <tr>
         <td><%= f.label "First Name:" %></td>

@@ -1,12 +1,11 @@
 <div class="row">
-  <hr/>
   <div>
     <h3>Order Fulfillment</h3>
   </div>
   <div>
     <br>
-    <h4>Subscriber Count: <%= @subscribers.count %></h4>
-    <h4>Book Count: <%= @books.count %></h4>
+    <h6>There are <%= @subscribers.count %> subscribers getting <%= @books.count %> books.</h6>
+    <h6>Average book count per active customer: <%= @average %></h6>
   </div>
   <hr/>
   <div>

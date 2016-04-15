@@ -20,11 +20,15 @@ class User < ActiveRecord::Base
   end
   
   def next_user
-    self.id == User.last.id ? (User.first.id) : (User.where("id > ?", self.id).first)
+    users = User.order(:l_name).to_a
+    user = users.index(self) + 1
+    user > users.length - 1 ? users.first.id : users[user].id
   end
   
   def previous_user
-    self.id == User.first.id ? (User.last.id) : (User.where("id < ?", self.id).last)
+    users = User.order(:l_name).to_a
+    user = users.index(self) - 1
+    user > users.length - 1 ? users.first.id : users[user].id
   end
   
   def f_home_phone

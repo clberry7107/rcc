@@ -12,5 +12,7 @@ class FulfillmentController < ApplicationController
     Book.order(:title).includes(:subscribers).order('subscribers.last_name').all.each do |book|
       @books << book unless book.subscribers.count == 0
     end
+    
+    @average = @books.length / @subscribers.length
   end
 end

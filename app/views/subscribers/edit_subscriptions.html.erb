@@ -1,5 +1,4 @@
 <div class="row">
-  <hr/>
   <h1>Edit Subcriptions for <%= @subscriber.full_name %></h1>
   <h3>Book Count: <%= @subscriber.books.count %></h3>
   <h3><%= link_to "Add Book", {:controller => "subscriptions", :action => "new", :subscriber => @subscriber.id} %></h3>

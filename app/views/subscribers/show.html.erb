@@ -1,8 +1,12 @@
 <div>
   <p id="notice"><%= notice %></p>
 </div>
-<div class="row">
-  <hr/>
+<div class="large-2 columns">
+  <% @subscribers.each do |subscriber| %>
+    <p><%= link_to subscriber.full_name, subscriber_path(subscriber) %></p>
+  <% end %>
+</div>
+<div class="large-10 columns">
   <h1>Subscriber Details</h1>
   <h4><%= link_to "Previous", subscriber_path(@subscriber.previous_subscriber)  %> |
   <%= link_to "Next", subscriber_path(@subscriber.next_subscriber) %></h4>

@@ -10,7 +10,7 @@ class BooksController < ApplicationController
   def order_count
     @books = Array.new
     
-    Book.order(:title).all.each do |book|
+    Book.order("LOWER(title)").all.each do |book|
       @books << book unless book.subscribers.count == 0
     end
     @total_quantity = Relationship.sum(:quantity)
@@ -19,7 +19,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all.order('title ASC')
+    @books = Book.all.order("LOWER(title)").includes(:subscribers)
   end
 
   # GET /books/1
@@ -88,6 +88,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.permit(:book, {})
+      params.require(:book).permit(:title, :index, :notes, :active)
     end
 end

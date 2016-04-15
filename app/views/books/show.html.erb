@@ -2,10 +2,9 @@
   <p id="notice"><%= notice %></p>
 </div>
 <div class="row">
-  <hr/>
   <h1>Book Details</h1>
-  <h4><%= link_to "Previous", book_path(@book.previous_book) unless @book.previous_book == @book.id %> |
-  <%= link_to "Next", book_path(@book.next_book) unless @book.next_book == @book.id%></h4>
+  <h4><%= link_to "Previous", book_path(@book.previous_book) %> |
+  <%= link_to "Next", book_path(@book.next_book) %></h4>
   <div>
     <table>
       <tr>

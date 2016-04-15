@@ -40,10 +40,14 @@ class Book < ActiveRecord::Base
   end
   
   def next_book
-    self.id == Book.last.id ? (self.id) : (Book.where("id > ?", self.id).first)
+    alpha_books = Book.order(:title).to_a
+    book = alpha_books.index(self) + 1
+    book > alpha_books.length - 1 ? alpha_books.first.id : alpha_books[book].id
   end
   
   def previous_book
-    self.id == Book.first.id ? (self.id) : (Book.where("id < ?", self.id).last)
+    alpha_books = Book.order(:title).to_a
+    book = alpha_books.index(self) - 1
+    book < 0 ? alpha_books.last.id : alpha_books[book].id
   end
 end
