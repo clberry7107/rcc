@@ -15,6 +15,9 @@
     <%= render 'layouts/header' %>
     <hr/>
     <div class="row">
+      <div class="whirl traditional" id="whirly">
+        <h3>My appologies <%= current_user.f_name %>, This is going to take a moment...</h3>
+      </div>
       <div class="large-12 columns">
         <div class="panel">
           <%= yield %>
