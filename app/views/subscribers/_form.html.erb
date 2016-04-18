@@ -25,6 +25,10 @@
         <td><%= f.text_field :last_name %></td>
       </tr>
       <tr>
+        <td><%= f.label "Email:" %></td>
+        <td><%= f.email_field :email %></td>
+      </tr>
+      <tr>
         <td><%= f.label "Address:" %></td>
         <td><%= f.text_field :address %></td>
       </tr>
@@ -38,15 +42,19 @@
       </tr>
       <tr>
         <td><%= f.label "Zip:" %></td>
-        <td><%= f.text_field :f_zip %></td>
+        <td><%= f.text_field :zip %></td>
       </tr>
       <tr>
         <td><%= f.label "Home Phone:" %></td>
-        <td><%= f.text_field :f_home_phone %></td>
+        <td><%= f.telephone_field :home_phone %></td>
       </tr>
       <tr>
         <td><%= f.label "Work Phone:" %></td>
-        <td><%= f.text_field :f_work_phone %></td>
+        <td><%= f.telephone_field :work_phone %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Mobile Phone:" %></td>
+        <td><%= f.telephone_field :mobile_phone %></td>
       </tr>
       <tr>
         <td><%= f.label "Type:" %></td>

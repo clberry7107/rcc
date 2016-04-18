@@ -10,6 +10,7 @@
       <tr>
         <th>Name Index</th>
         <th>Name</th>
+        <th>Email</th>
         <th>Address</th>
         <th>City</th>
         <th>State</th>
@@ -20,11 +21,12 @@
       
       <tr>
         <td><%= link_to subscriber.index, subscriber_path(subscriber) %></td>
-        <td><%= link_to subscriber.full_name, subscriber_path(subscriber) %></td>
-        <td><%= link_to subscriber.address, subscriber_path(subscriber) %></td>
-        <td><%= link_to subscriber.city, subscriber_path(subscriber) %></td>
-        <td><%= link_to subscriber.state, subscriber_path(subscriber) %></td>
-        <td><%= link_to subscriber.f_zip, subscriber_path(subscriber) %></td>
+        <td><%= link_to subscriber.full_name || "", subscriber_path(subscriber) %></td>
+        <td><%= link_to subscriber.email || "", subscriber_path(subscriber) %></td>
+        <td><%= link_to subscriber.address || "", subscriber_path(subscriber) %></td>
+        <td><%= link_to subscriber.city || "", subscriber_path(subscriber) %></td>
+        <td><%= link_to subscriber.state || "", subscriber_path(subscriber) %></td>
+        <td><%= link_to subscriber.f_zip || "", subscriber_path(subscriber) %></td>
       </tr>
       <% end %>
     </table>

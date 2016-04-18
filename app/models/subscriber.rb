@@ -3,15 +3,17 @@ class Subscriber < ActiveRecord::Base
   has_many :books, through: :subscribers_books
   
   before_validation(on: :update) do
-    self.home_phone = home_phone.gsub(/[^0-9]/, "")
-    self.work_phone = work_phone.gsub(/[^0-9]/, "")
-    self.zip = zip.gsub(/[^0-9]/,"")
+    self.home_phone = home_phone.gsub(/[^0-9]/, "") unless self.home_phone.nil?
+    self.work_phone = work_phone.gsub(/[^0-9]/, "") unless self.work_phone.nil?
+    self.mobile_phone = mobile_phone.gsub(/[^0-9]/, "") unless self.mobile_phone.nil?
+    self.zip = zip.gsub(/[^0-9]/,"") unless self.zip.nil?
   end
   
   before_validation(on: :create) do
-    self.home_phone = home_phone.gsub(/[^0-9]/, "")
-    self.work_phone = work_phone.gsub(/[^0-9]/, "")
-    self.zip = zip.gsub(/[^0-9]/,"")
+    self.home_phone = home_phone.gsub(/[^0-9]/, "") unless self.home_phone.nil?
+    self.work_phone = work_phone.gsub(/[^0-9]/, "") unless self.work_phone.nil?
+    self.mobile_phone = mobile_phone.gsub(/[^0-9]/, "") unless self.mobile_phone.nil?
+    self.zip = zip.gsub(/[^0-9]/,"") unless self.zip.nil?
   end
   
   def self.remove_newline(value)
@@ -81,6 +83,10 @@ class Subscriber < ActiveRecord::Base
   
   def f_work_phone
     self.work_phone == nil ? (return nil) : f_number(self.work_phone.chars())
+  end
+  
+  def f_mobile_phone
+    self.mobile_phone == nil ? (return nil) : f_number(self.mobile_phone.chars())
   end
     
   def f_number(num_array)

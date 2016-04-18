@@ -13,6 +13,6 @@ class FulfillmentController < ApplicationController
       @books << book unless book.subscribers.count == 0
     end
     
-    @average = @books.length / @subscribers.length
+    @average = @books.length / @subscribers.length rescue 0
   end
 end

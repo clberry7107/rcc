@@ -12,14 +12,14 @@ class SubscribersController < ApplicationController
   # GET /subscribers
   # GET /subscribers.json
   def index
-    @subscribers = Subscriber.all
+    @subscribers = Subscriber.all.order('last_name ASC')
     authorize! :view, @user
   end
 
   # GET /subscribers/1
   # GET /subscribers/1.json
   def show
-    @subscribers = Subscriber.all.order(:last_name)
+    @subscribers = Subscriber.all.order('last_name ASC')
   end
 
   # GET /subscribers/new
@@ -91,6 +91,6 @@ class SubscribersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subscriber_params
-      params.require(:subscriber).permit(:first_name,:last_name,:address,:city,:state,:zip,:home_phone,:work_phone,:mobile_phone,:mail_list,:subscriber_type)
+      params.require(:subscriber).permit(:first_name,:last_name, :email, :address,:city,:state,:zip,:home_phone,:work_phone,:mobile_phone,:mail_list,:subscriber_type)
     end
 end

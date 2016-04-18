@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
   before_validation(on: :update) do
-    self.home_phone = home_phone.gsub(/[^0-9]/, "")
-    self.work_phone = work_phone.gsub(/[^0-9]/, "")
-    self.mobile_phone = mobile_phone.gsub(/[^0-9]/, "")
-    self.zip = zip.gsub(/[^0-9]/,"")
+    self.home_phone = home_phone.gsub(/[^0-9]/, "") unless self.home_phone.nil?
+    self.work_phone = work_phone.gsub(/[^0-9]/, "") unless self.work_phone.nil?
+    self.mobile_phone = mobile_phone.gsub(/[^0-9]/, "") unless self.mobile_phone.nil?
+    self.zip = zip.gsub(/[^0-9]/,"") unless self.zip.nil?
   end
          
   def full_name
