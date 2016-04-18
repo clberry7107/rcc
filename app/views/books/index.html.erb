@@ -5,7 +5,9 @@
   <div>
     <h2>Current Book List</h2>
     <h6>Total Books: <%= @books.count %></h6>
-    <h6><%= button_to "Add Book", new_book_path, class: "button success" %> </h6>
+    <% if can? :add_book %>
+      <h6><%= button_to "Add Book", new_book_path, class: "button success" %> </h6>
+    <% end %>
     <table> 
       <tr>
         <th>Title</th>

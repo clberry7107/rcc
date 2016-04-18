@@ -3,4 +3,13 @@
 </div>
 <div class="row">
   <h1>Welcome <%= current_user.f_name %></h1>
+  <% if current_user.can_view? %>
+    <p>
+      Poke, Prod, change what needs changing.
+    </p>
+  <% else %>
+    <p>
+      Your user account has been created.  We need to wait for a system admin to give you access to the rest of the sight.
+    </p>
+  <% end %>
 </div>

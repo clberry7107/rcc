@@ -1,5 +1,6 @@
 class SubscribersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user
   before_action :set_subscriber, only: [:show, :edit, :edit_subscriptions, :update, :destroy]
 
 
@@ -12,6 +13,7 @@ class SubscribersController < ApplicationController
   # GET /subscribers.json
   def index
     @subscribers = Subscriber.all
+    authorize! :view, @user
   end
 
   # GET /subscribers/1
@@ -81,6 +83,10 @@ class SubscribersController < ApplicationController
       
       rescue
         @subscriber = Subscriber.find_by index: params[:id]
+    end
+    
+    def set_user
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

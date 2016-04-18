@@ -51,5 +51,17 @@ class User < ActiveRecord::Base
   def f_zip
     self.zip == nil ? (return nil) : self.zip.length > 5 ? self.zip.insert(5, '-') : self.zip
   end
+  
+  def is_admin
+    self.user_type == "admin"
+  end
+  
+  def clerk?
+    self.user_type == "clerk"
+  end
+  
+  def can_view?
+    self.clerk? || self.is_admin
+  end
 
 end

@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /newreleases/1
   # GET /newreleases/1.json
   def show
+    #authorize! :view, @user
   end
 
   # GET /newreleases/new
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
 
   # GET /newreleases/1/edit
   def edit
+    authorize! :update, @user
   end
 
   # POST /newreleases

@@ -12,6 +12,7 @@
     <h3><%= link_to "Order Fulfillment", fulfillment_index_path %></h3>
   </div>
   <hr/>
+  <% if can? :upload_data %>
   <div>
     <h3>Import New Release File</h3>
     <%= form_tag import_newreleases_path, multipart: true do  %>
@@ -52,4 +53,5 @@
     <% end %>
   </div>
   <hr>
+  <% end %>
 </div>

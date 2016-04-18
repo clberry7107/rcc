@@ -13,7 +13,7 @@
     <table>
       <tr>
         <td><%= f.label "Email and Password" %></td>
-        <td><%= link_to "Edit Details", edit_user_registration_path %></td>
+        <td><%= link_to "Edit Details", edit_user_registration_path(@user) %></td>
       </tr>
       <tr>
         <td><%= f.label "First Name:" %></td>
@@ -56,10 +56,12 @@
         <td><%= f.label "Mobile Phone:" %></td>
         <td><%= f.text_field :mobile_phone %></td>
       </tr>
+      <% if can? :change_user_type, User%>
       <tr>
         <td><%= f.label "Type:" %></td>
         <td><%= f.text_field :user_type %></td>
       </tr>
+      <% end %>
     </table>
   </div>
 
