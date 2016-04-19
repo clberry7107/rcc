@@ -19,7 +19,13 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all.order("LOWER(title)").includes(:subscribers)
+    params[:active] == "true" ? 
+    @books = Book.all.where('active = ?', true).order("LOWER(title)").includes(:subscribers) : 
+    @books = Book.all.where('active = ?', false).order("LOWER(title)").includes(:subscribers)
+    
+    if @books.nil? 
+      @books = Books.all.order("LOWER(title)").includes(:subscribers)
+    end
   end
 
   # GET /books/1

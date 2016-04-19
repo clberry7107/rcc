@@ -8,19 +8,15 @@
     <h6><%= button_to "Add Subscriber", new_subscriber_path, class: "button success" %></h6>
       <table> 
       <tr>
-        <th>Name Index</th>
         <th>Name</th>
         <th>Email</th>
         <th>Address</th>
         <th>City</th>
         <th>State</th>
         <th>Zip</th>
-        
       </tr>
       <% @subscribers.each do |subscriber| %>
-      
       <tr>
-        <td><%= link_to subscriber.index, subscriber_path(subscriber) %></td>
         <td><%= link_to subscriber.full_name || "", subscriber_path(subscriber) %></td>
         <td><%= link_to subscriber.email || "", subscriber_path(subscriber) %></td>
         <td><%= link_to subscriber.address || "", subscriber_path(subscriber) %></td>

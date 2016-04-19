@@ -13,8 +13,8 @@
     </tr>
     <% @relationships.each do |relationship| %>
     <tr>
-      <td><%= link_to relationship.book_index, book_path(relationship.book_id) %></td>
-      <td><%= link_to relationship.name_index, subscriber_path(relationship.subscriber_id) %></td>
+      <td><%= link_to relationship.book.title, book_path(relationship.book_id) %></td>
+      <td><%= link_to relationship.subscriber.full_name, subscriber_path(relationship.subscriber_id) %></td>
       <td><%= relationship.quantity %></td>
       <td><%= relationship.date_added %></td>
       <td><%= link_to "Delete", relationship_path(relationship), method: :delete %></td>
