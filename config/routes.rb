@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   
   post 'books/import' => 'books#import'
   get 'books/order_count' => 'books#order_count'
+  post 'books/status' => 'books#index'
   resources :books
   
   post 'relationships/import' => 'relationships#import'
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
   get 'subscriptions/add' => 'subscriptions#new'
   post 'subscriptions/create' => 'subscriptions#create'
   get 'subscriptions/index' => 'subscriptions#index'
+  
   
   resources :fulfillment
   resources :utilities

@@ -4,10 +4,20 @@
 <div class="row">
   <div>
     <h2>Current Book List</h2>
-    <h6>Total Books: <%= @books.count %></h6>
-    <% if can? :add_book %>
-      <h6><%= button_to "Add Book", new_book_path, class: "button success" %> </h6>
-    <% end %>
+    <div class="row">
+      <div class="large-3 column">
+        <h6>Total Books: <%= @books.count %></h6>
+        <% if can? :add_book %>
+          <h6><%= button_to "Add Book", new_book_path, class: "button success" %> </h6>
+        <% end %>
+      </div>
+      <div class="button-group large-3 column">
+        <h6>Sort by Acive status:</h6>
+        <%= button_to "All", books_status_path({:active => 'all'}), class: "button success" %>
+        <%= button_to "True", books_status_path({:active => 'true'}), class: "button success" %>
+        <%= button_to "False", books_status_path({:active => 'false'}), class: "button success" %>
+      </div>
+    </div>
     <table> 
       <tr>
         <th>Title</th>
