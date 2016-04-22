@@ -66,7 +66,7 @@
   <hr/>
   <div>
     <h2>Current Subscriptions</h2>
-    <h4>Subscription count: <%= @subscriber.books.count %><br/></h4>
+    <h4>Subscription count: <%= @subscriber.active_subscriptions %><br/></h4>
     <h5><%= link_to "Edit Subscriptions", subscriber_edit_subscriptions_path(:id => @subscriber.id) %></h5>
     <div>
       <table>
@@ -75,10 +75,12 @@
           <th>Quantity</th>
         </tr>
         <% @subscriber.books.order(:title).each do |book| %>
+        <% if book.active == true %>
           <tr>
             <td><%= link_to book.title, book_path(book) %></td>
             <td><%= @subscriber.book_quantity(book) %></td>
           </tr>
+        <% end %>
         <% end %>
       </table>
     </div>

@@ -19,7 +19,7 @@ class SubscribersController < ApplicationController
   # GET /subscribers/1
   # GET /subscribers/1.json
   def show
-    @subscribers = Subscriber.all.order('last_name ASC')
+        
   end
 
   # GET /subscribers/new

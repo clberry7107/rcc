@@ -11,7 +11,7 @@ class BooksController < ApplicationController
     @books = Array.new
     
     Book.order("LOWER(title)").all.each do |book|
-      @books << book unless book.subscribers.count == 0
+      @books << book unless book.subscribers.count == 0 || book.active == false
     end
     @total_quantity = Relationship.sum(:quantity)
   end

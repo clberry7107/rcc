@@ -104,7 +104,21 @@ class Subscriber < ActiveRecord::Base
   end
   
   def total_books
-    Relationship.where("name_index = ?", self.index).sum(:quantity)
-    
+    books = Relationship.where("name_index = ?", self.index)
+    count = 0
+    books.each do |book|
+      if Book.find_by(index: book.book_index).active == true
+        count += book.quantity
+      end
+    end
+    return count
+  end
+  
+  def active_subscriptions
+    count = 0
+    self.books.each do |book|
+      book.active ? count += 1 : count = count
+    end
+    return count
   end
 end
