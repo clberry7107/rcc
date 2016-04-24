@@ -5,13 +5,17 @@
   <table> 
     <tr>
       <th>Title</th>
-      <th>Order Quantity</th>
+      <th>Subscriptions</th>
+      <th>Stock</th>
+      <th>Total</th>
       <th>Notes</th>
     </tr>
     <% @books.each do |book| %>
       <tr>
         <td><%= link_to book.title, book_path(book) %></td>
-        <th><%= book.order_quantity %></th>
+        <td><%= @sub = book.order_quantity || 0%></td>
+        <td><%= @store = book.stock_quantity || 0 %></td>
+        <td><%= @sub + @store %></td>
         <td><%= book.notes %></td>
       </tr>
     <% end %>

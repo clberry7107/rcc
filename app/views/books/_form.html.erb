@@ -18,20 +18,22 @@
         <td><%= f.text_field :title %></td>
       </tr>
       <tr>
-        <td><%= f.label "Book Index:" %></td>
-        <td><%= f.text_field :index, :readonly => true %></td>
-      </tr>
-      <tr>
         <td><%= f.label "Notes:" %></td>
         <td><%= f.text_field :notes %></td>
       </tr>
-      <tr>
-        <td><%= f.label "Active:" %></td>
-        <td><%= f.text_field :active %></td>
-      </tr>
+      <% if can? :destroy, Book %>
+        <tr>
+          <td><%= f.label "Active:" %></td>
+          <td><%= f.check_box :active %></td>
+        </tr>
+        <tr>
+          <td><%= f.label "Store Stock Quantity:" %></td>
+          <td><%= f.number_field :stock_quantity %></td>
+        </tr>
+      <% end %>
     </table>
   </div>
-
+  <div class="button-group">
     <%= f.submit "Commit", :class => "button success" %>
   
 <% end %>

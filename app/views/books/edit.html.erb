@@ -2,12 +2,11 @@
   <h1>Update Book Information</h1>
   <h4>
     <%= render 'form' %>
-    <%= link_to 'Show', @book %> |
-    <%= link_to 'Back', books_path %> |
+    <%= button_to 'Cancel', book_path(@book), method: :get, class: "button warning" %>
     <% if can? :destroy, Book %>
-      <%= link_to "Delete Book", book_path(@book), :method => :delete, :data => {:confirm => "This will permenently delete #{@book.title}\nAre you sure?"} %>
+      <%= button_to "Delete Book", book_path(@book), :method => :delete, class: "button alert", :data => {:confirm => "This will permenently delete #{@book.title}\nAre you sure?"} %>
     <% end %>
-    
+    </div>
   </h4>
 
 </div>

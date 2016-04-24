@@ -32,6 +32,11 @@
     </h4>
   </div>
   <hr/>
+  <div class="button-group">
+    <h4>Store Stock Order Quantity: <%= @book.stock_quantity %></h4>
+    <%= button_to "Change Stock Quantity", edit_book_path(@book), class: "button info", method: :get %>
+  </div>
+  <hr>
   <div>
     <h2>Subscribers for this book</h2>
     <h3>Subscriber count: <%= @book.subscribers.count %></h3>

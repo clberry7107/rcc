@@ -9,11 +9,15 @@ class BooksController < ApplicationController
   
   def order_count
     @books = Array.new
+    @total_quantity = 0
     
     Book.order("LOWER(title)").all.each do |book|
       @books << book unless book.subscribers.count == 0 || book.active == false
     end
-    @total_quantity = Relationship.sum(:quantity)
+    
+    @books.each do |book|
+      @total_quantity += Relationship.where("book_index = ?", book.index).sum(:quantity)
+    end
   end
 
   # GET /books
@@ -95,6 +99,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :index, :notes, :active)
+      params.require(:book).permit(:title, :index, :notes, :active, :stock_quantity)
     end
 end
