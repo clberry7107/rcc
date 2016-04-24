@@ -12,7 +12,8 @@
   <tbody>
     <% @fans.each do |fan| %>
       <tr>
-        <td><%= link_to fan.email, fan %></td>
+        <td><%= link_to fan.full_name, fan_path(fan) %></td>
+        <td><%= link_to fan.email, fan_path(fan) %></td>
         <td><%= link_to 'Edit', edit_fan_path(fan) %></td>
         <td><%= link_to 'Destroy', fan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
