@@ -1,6 +1,13 @@
 <div class="row">
   <h1>Update Book Information</h1>
-  <%= render 'form' %>
-  <%= link_to 'Show', @book %> |
-  <%= link_to 'Back', books_path %>
+  <h4>
+    <%= render 'form' %>
+    <%= link_to 'Show', @book %> |
+    <%= link_to 'Back', books_path %> |
+    <% if can? :destroy, Book %>
+      <%= link_to "Delete Book", book_path(@book), :method => :delete, :data => {:confirm => "This will permenently delete #{@book.title}\nAre you sure?"} %>
+    <% end %>
+    
+  </h4>
+
 </div>

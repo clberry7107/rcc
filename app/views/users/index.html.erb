@@ -16,6 +16,9 @@
         <td><%= link_to user.email, user_path(user)  %></td>
         <td><%=user.full_name %></td>
         <td><%= user.city %></td>
+        <% if can? :destroy, User %>
+        <td><%= link_to "Delete User" , user_path(user), :method => :delete, :data => {:confirm => "This will permenently delete #{user.email}\nAre you sure?"} %></td>
+        <% end %>
       </tr>
   
       <% end %>

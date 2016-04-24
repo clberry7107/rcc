@@ -16,10 +16,9 @@ class AccessPolicy
     # In this case an administrator.
     #
     role :admin, { is_admin: true } do
-      can :destroy, Subscriber
+      can [:create, :update, :destroy], Subscriber
       can [:create, :update, :destroy], Book
-      can :manage, User
-      can :change_user_type, User
+      can [:create, :update, :destroy, :change_user_type], User
       can :upload_data
       can :add_book
       can :view_menu

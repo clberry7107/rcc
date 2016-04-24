@@ -40,13 +40,13 @@ class SubscribersController < ApplicationController
   # POST /subscribers.json
   def create
     @subscriber = Subscriber.new(subscriber_params)
-
     respond_to do |format|
       if @subscriber.save
         format.html { redirect_to @subscriber, notice: 'Subscriber was successfully created.' }
         format.json { render :show, status: :created, location: @subscriber }
       else
-        format.html { render :new }
+        @subscriber.index = (Subscriber.maximum(:index)) + 1
+      format.html { render :new }
         format.json { render json: @subscriber.errors, status: :unprocessable_entity }
       end
     end

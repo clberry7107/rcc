@@ -7,14 +7,32 @@ class Subscriber < ActiveRecord::Base
     self.work_phone = work_phone.gsub(/[^0-9]/, "") unless self.work_phone.nil?
     self.mobile_phone = mobile_phone.gsub(/[^0-9]/, "") unless self.mobile_phone.nil?
     self.zip = zip.gsub(/[^0-9]/,"") unless self.zip.nil?
+    self.first_name.capitalize!
+    self.last_name.capitalize!
   end
   
   before_validation(on: :create) do
+    check_formating
+  end
+  
+  def check_formating
     self.home_phone = home_phone.gsub(/[^0-9]/, "") unless self.home_phone.nil?
     self.work_phone = work_phone.gsub(/[^0-9]/, "") unless self.work_phone.nil?
     self.mobile_phone = mobile_phone.gsub(/[^0-9]/, "") unless self.mobile_phone.nil?
     self.zip = zip.gsub(/[^0-9]/,"") unless self.zip.nil?
+    self.first_name.capitalize!
+    self.last_name.capitalize!
   end
+  
+  validates :first_name, :last_name, presence: true
+  validate :any_present?
+
+  def any_present?
+    if %w(home_phone work_phone mobile_phone email).all?{|attr| self[attr].blank?}
+      errors.add :base, "There is no way to contact this user.  Please add email or phone number."
+    end
+  end
+  
   
   def self.remove_newline(value)
     if !value.chr.is_number? 
