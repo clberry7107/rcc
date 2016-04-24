@@ -67,7 +67,7 @@
   <div>
     <h2>Current Subscriptions</h2>
     <h4>Subscription count: <%= @subscriber.active_subscriptions %><br/></h4>
-    <h5><%= link_to "Edit Subscriptions", subscriber_edit_subscriptions_path(:id => @subscriber.id) %></h5>
+    <h5><%= button_to "Edit Subscriptions", subscriber_edit_subscriptions_path(:id => @subscriber.id), :class => "button info" %></h5>
     <div>
       <table>
         <tr>

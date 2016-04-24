@@ -5,7 +5,11 @@ class UsersController < ApplicationController
   # GET /newreleases
   # GET /newreleases.json
   def index
-    @users = User.all
+    if can? :view, User
+      @users = User.all
+    else
+      redirect_to user_path(current_user)
+    end
   end
 
   # GET /newreleases/1
