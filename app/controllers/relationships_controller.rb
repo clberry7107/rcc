@@ -3,6 +3,7 @@ class RelationshipsController < ApplicationController
   before_action :set_relationship, only: [:show, :edit, :update, :destroy]
   
   def import
+    Relationship.delete_all
     Relationship.import(params[:file])
     redirect_to relationships_path, notice: "Books imported."
   end

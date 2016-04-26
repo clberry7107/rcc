@@ -3,6 +3,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   
   def import
+    Book.delete_all
     Book.import(params[:file])
     redirect_to books_path, notice: "Books imported."
   end
@@ -16,7 +17,7 @@ class BooksController < ApplicationController
     end
     
     @books.each do |book|
-      @total_quantity += Relationship.where("book_index = ?", book.index).sum(:quantity)
+      @total_quantity += book.order_quantity
     end
   end
 

@@ -5,8 +5,10 @@ class SubscribersController < ApplicationController
 
 
   def import
+    Relationship.delete_all
+    SubscribersBook.delete_all
     Subscriber.import(params[:file])
-    redirect_to subscribers_path, notice: "Products imported."
+    redirect_to subscribers_path, notice: "#[Subscriber.count} subscribers imported."
   end
   
   # GET /subscribers
@@ -91,6 +93,6 @@ class SubscribersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subscriber_params
-      params.require(:subscriber).permit(:first_name,:last_name, :email, :address,:city,:state,:zip,:home_phone,:work_phone,:mobile_phone,:mail_list,:subscriber_type)
+      params.require(:subscriber).permit(:first_name,:last_name, :email, :address,:city,:state,:zip,:home_phone,:work_phone,:mobile_phone,:mail_list,:subscriber_type, :active)
     end
 end

@@ -21,7 +21,7 @@
     <h3>Import New Release File</h3>
     <%= form_tag import_newreleases_path, multipart: true do  %>
     <%= file_field_tag :file %><br/>
-    <%= submit_tag "Upload" %>
+    <%= submit_tag "Upload", data: { confirm: "This will remove current data and replace with this file.\nContinue?"} %>
     <% end %>
   </div>
   <hr>
@@ -29,7 +29,7 @@
     <h3>Import New Series File</h3>
     <%= form_tag newseries_import_path, multipart: true do  %>
     <%= file_field_tag :file %><br/>
-    <%= submit_tag "Upload" %>
+    <%= submit_tag "Upload", data: { confirm: "This will remove current data and replace with this file.\nContinue?"}  %>
     <% end %>
   </div>
   <hr>
@@ -37,7 +37,7 @@
     <h3>Upload Subscriber List</h3>
     <%= form_tag subscribers_import_path, multipart: true do  %>
     <%= file_field_tag :file %><br/>
-    <%= submit_tag "Upload" %>
+    <%= submit_tag "Upload", data: { confirm: "This will remove current data and replace with this file.\nContinue?"}  %>
     <% end %>
   </div>
   <hr> 
@@ -45,7 +45,7 @@
     <h3>Upload Book List</h3>
     <%= form_tag books_import_path, multipart: true do  %>
     <%= file_field_tag :file %><br/>
-    <%= submit_tag "Upload" %>
+    <%= submit_tag "Upload", data: { confirm: "This will remove current data and replace with this file.\nContinue?"}  %>
     <% end %>
   </div>
   <hr>
@@ -53,7 +53,7 @@
     <h3>Upload Relationship List</h3>
     <%= form_tag relationships_import_path, multipart: true do  %>
     <%= file_field_tag :file %><br/>
-    <%= submit_tag "Upload" %>
+    <%= submit_tag "Upload", data: { confirm: "This will remove current data and replace with this file.\nContinue?"}  %>
     <% end %>
   </div>
   <hr>

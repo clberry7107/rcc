@@ -4,6 +4,7 @@ class NewseriesController < ApplicationController
 
 
   def import
+    Newseries.delete_all
     Newseries.import(params[:file])
     redirect_to newseries_index_path, notice: "Products imported."
   end

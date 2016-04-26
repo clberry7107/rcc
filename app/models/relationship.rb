@@ -30,12 +30,12 @@ class Relationship < ActiveRecord::Base
     relationship.name_index = row['Name Index'] 
     relationship.quantity = row['Quantity']
     relationship.date_added = row['Date Input']
-    if relationship.transfer_relationship(relationship.name_index, relationship.book_index)
+    if relationship.transfer_relationship(relationship.name_index, relationship.book_index, relationship.quantity)
       relationship.save
     end
   end rescue nil
   
-  def transfer_relationship(name, book)
+  def transfer_relationship(name, book, quantity)
     db_book = (Book.find_by index: book)
     book_id = db_book.id unless db_book.nil?
     db_subscriber = (Subscriber.find_by index: name)
@@ -45,6 +45,7 @@ class Relationship < ActiveRecord::Base
       relation = SubscribersBook.new
       relation.subscriber_id = subscriber_id 
       relation.book_id = book_id
+      relation.quantity = quantity
       relation.save
       return true
     else

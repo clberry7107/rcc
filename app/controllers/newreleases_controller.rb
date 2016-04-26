@@ -3,6 +3,7 @@ class NewreleasesController < ApplicationController
   before_action :set_newrelease, only: [:show, :edit, :update, :destroy]
 
   def import
+    Newrelease.delete_all
     Newrelease.import(params[:file])
     redirect_to newreleases_path, notice: "Products imported."
   end

@@ -2,12 +2,14 @@ class Subscriber < ActiveRecord::Base
   has_many :subscribers_books
   has_many :books, through: :subscribers_books
   
+  attr_accessor :importing
+  
   before_validation(on: :update) do
     check_formating
   end
   
   before_validation(on: :create) do
-    check_formating
+    check_formating unless Proc.new {|subscriber| subscriber.importing }
   end
   
   def check_formating
@@ -71,6 +73,7 @@ class Subscriber < ActiveRecord::Base
     subscriber.last_edit = row['Last Edit']
     subscriber.subscriber_type = row['Type']
     subscriber.notes = remove_newline(row['Notes']) unless row['Notes'].nil?
+    subscriber.importing = true
     subscriber.save
   end rescue nil
   
