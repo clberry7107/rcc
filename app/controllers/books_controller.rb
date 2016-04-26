@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   def import
     Book.delete_all
     Book.import(params[:file])
-    redirect_to books_path, notice: "Books imported."
+    redirect_to books_path, notice: "#{Book.count} Books imported."
   end
   
   def order_count

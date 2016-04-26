@@ -5,7 +5,7 @@ class RelationshipsController < ApplicationController
   def import
     Relationship.delete_all
     Relationship.import(params[:file])
-    redirect_to relationships_path, notice: "Books imported."
+    redirect_to relationships_path, notice: "#{Relationship.count} relationships imported."
   end
 
   # GET /relationships

@@ -8,7 +8,7 @@ class SubscribersController < ApplicationController
     Relationship.delete_all
     SubscribersBook.delete_all
     Subscriber.import(params[:file])
-    redirect_to subscribers_path, notice: "#[Subscriber.count} subscribers imported."
+    redirect_to subscribers_path, notice: "#{Subscriber.count} subscribers imported."
   end
   
   # GET /subscribers
