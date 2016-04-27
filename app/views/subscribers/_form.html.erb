@@ -13,16 +13,17 @@
   <div>
     <table>
       <tr>
-        <td><%= f.label "Index:" %></td>
-        <td><%= f.text_field :index, :readonly => true %></td>
-      </tr>
-      <tr>
         <td><%= f.label "First Name:" %></td>
         <td><%= f.text_field :first_name %></td>
       </tr>
       <tr>
         <td><%= f.label "Last Name:" %></td>
         <td><%= f.text_field :last_name %></td>
+      </tr>
+      
+      <tr>
+        <td><%= f.label "Active:" %></td>
+        <td><%= f.check_box :active %></td>
       </tr>
       <tr>
         <td><%= f.label "Email:" %></td>
