@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :newseries 
   
   post 'subscribers/import' => 'subscribers#import'
-  get 'subscriber/edit_subscriptions' =>'subscribers#edit_subscriptions'
+  post 'subscriber/edit_subscriptions' =>'subscribers#edit_subscriptions'
   resources :subscribers
   
   post 'books/import' => 'books#import'
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :relationships
   
   post 'subscriptions/update' => 'subscriptions#update'
-  get 'subscriptions/add' => 'subscriptions#new'
+  post 'subscriptions/add' => 'subscriptions#new'
   post 'subscriptions/create' => 'subscriptions#create'
   get 'subscriptions/index' => 'subscriptions#index'
   

@@ -137,4 +137,6 @@ class Subscriber < ActiveRecord::Base
     end
     return count
   end
+  
+  
 end
