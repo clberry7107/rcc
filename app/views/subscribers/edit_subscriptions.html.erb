@@ -1,7 +1,6 @@
-<div class="row">
+<div class="large-12 columns">
   <h1>Edit Subcriptions for <%= @subscriber.full_name %></h1>
   <h3>Book Count: <%= @subscriber.active_subscriptions %></h3>
-  <h3><%= button_to "Add Book", {:controller => "subscriptions", :action => "new", :subscriber => @subscriber.id}, :class => "button info" %></h3>
   <%= form_tag("/subscriptions/update", method: "post") do %>
     <%= hidden_field_tag(:subscriber_id, @subscriber.id) %>
   </div>

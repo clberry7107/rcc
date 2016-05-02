@@ -1,20 +1,29 @@
-<h2>Add subscription for <%= @subscriber.full_name %></h2>
-<%= form_tag("/subscriptions/create", method: "post") do %>
-  <%= hidden_field_tag(:subscriber_id, @subscriber.id) %>
-  <table> 
-    <tr>
-      <th>Title</th>
-      <th>Order Quantity</th>
-    </tr>
-    <% @books.each do |book| %>
-      <% if @subscriber.book_quantity(book) == 0 %>
-      <tr>
-        <td><%= link_to book.title, book_path(book) %></td>
-        <td><%= label_tag(:q, "Quantity:") %>
-            <%= number_field(:q, book.id, :step => 1, :min => 0 ) %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </table>
-  <%= submit_tag("Add Books") %>
-<% end %>
+<div class="large-12 columns">
+  <h2>Add subscription for <%= @subscriber.full_name %></h2>
+  <div>
+    <%= form_tag("/subscriptions/create", method: "post") do %>
+    <%= hidden_field_tag(:subscriber_id, @subscriber.id) %>
+    
+    <div class="large-10 columns">
+      <table> 
+        <tr>
+          <th>Title</th>
+          <th>Order Quantity</th>
+        </tr>
+        <% @books.each do |book| %>
+          <% if @subscriber.book_quantity(book) == 0 %>
+          <tr>
+            <td><%= link_to book.title, book_path(book) %></td>
+            <td><%= label_tag(:q, "Quantity:") %>
+                <%= number_field(:q, book.id, :step => 1, :min => 0 ) %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </table>  
+    </div>
+    <div class="large-2 columns">
+      <%= submit_tag  "Add Books", :class => "button success" %>
+    </div>
+  <% end %>
+  </div>
+</div>

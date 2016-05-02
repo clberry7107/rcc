@@ -43,7 +43,7 @@ class SubscriptionsController < ApplicationController
   
   def update
     params[:q].each do |k,v|
-      relation = Relationship.where("book_index = ? AND name_index = ?", Book.find(k).index, Subscriber.find(params[:subscriber_id]).index).limit(1)
+      relation = Relationship.where("book_index = ? AND name_index = ?", Book.find(k).index, @subscriber.index).limit(1)
       if v == '0'
         sb = @subscriber.subscribers_books.where("book_id = ?", k).limit(1)
         SubscribersBook.destroy(sb) unless sb.empty?
@@ -53,7 +53,7 @@ class SubscriptionsController < ApplicationController
       end
     end
     
-    redirect_to subscriber_path(:id => params[:subscriber_id])
+    redirect_to subscriber_path(@subscriber)
   end
   
   def destroy
