@@ -72,9 +72,9 @@ class SubscribersController < ApplicationController
   # DELETE /subscribers/1
   # DELETE /subscribers/1.json
   def destroy
-    @subscriber.destroy
+    @subscriber.update(active: :false)
     respond_to do |format|
-      format.html { redirect_to subscribers_url, notice: 'Subscriber was successfully destroyed.' }
+      format.html { redirect_to subscribers_url, notice: 'Subscriber is now inactive.' }
       format.json { head :no_content }
     end
   end

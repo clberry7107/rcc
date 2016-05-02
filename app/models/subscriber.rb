@@ -73,6 +73,7 @@ class Subscriber < ActiveRecord::Base
     subscriber.last_edit = row['Last Edit']
     subscriber.subscriber_type = row['Type']
     subscriber.notes = remove_newline(row['Notes']) unless row['Notes'].nil?
+    subscriber.active = true
     subscriber.importing = true
     subscriber.save
   end rescue nil
