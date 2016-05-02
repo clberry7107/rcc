@@ -7,8 +7,8 @@ Rails.application.initialize!
   
   #sendgrid account config
   ActionMailer::Base.smtp_settings = {
-  :user_name => 'clberry7107',
-  :password => '9398Ship',
+  :user_name => '',
+  :password => '',
   :domain => 'rcc-clberry7107.c9users.io',
   :address => 'smtp.sendgrid.net',
   :port => 2525,
