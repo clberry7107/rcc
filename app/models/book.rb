@@ -36,7 +36,11 @@ class Book < ActiveRecord::Base
   end rescue nil
   
   def order_quantity
-    Relationship.where("book_index = ?", self.index).sum(:quantity)
+     Relationship.where("book_index = ?", self.index).sum(:quantity)
+    # total = 0
+    # self.subscribers.each do |subscriber|
+    #   total =+ subscriber.book_quantity(self) unless !subscriber.active
+    # end
   end
   
   def next_book

@@ -77,6 +77,15 @@ class SubscribersController < ApplicationController
       format.html { redirect_to subscribers_url, notice: 'Subscriber is now inactive.' }
       format.json { head :no_content }
     end
+    @subscriber.subscribers_books.each do |subscription|
+      subscription.quantity = 0
+      subscription.save
+    end
+    relations = Relationship.where("name_index = ?", @subscriber.index)
+    relations.each do |relation|
+      relation.quantity = 0
+      relation.save
+    end
   end
 
   private
