@@ -1,5 +1,5 @@
 <div class="row">
-  <%= image_tag("new_header.jpg") %>
+  <%= image_tag("new_header.jpg", :class => "header") %>
   <hr/>
   <% if current_user && current_user.can_view? %>
     <ul class="breadcrumbs large-6 columns">
