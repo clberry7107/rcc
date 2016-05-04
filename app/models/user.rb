@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
+  enum role: [:guest, :user, :admin]
+
+         
   before_validation(on: :update) do
     self.home_phone = home_phone.gsub(/[^0-9]/, "") unless self.home_phone.nil?
     self.work_phone = work_phone.gsub(/[^0-9]/, "") unless self.work_phone.nil?

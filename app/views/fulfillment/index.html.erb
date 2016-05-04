@@ -4,7 +4,8 @@
   </div>
   <div>
     <br>
-    <h6>There are <%= @subscribers.count %> subscribers getting <%= @books.count %> books.</h6>
+    <h6>There are <%= @subscribers.count %> subscribers getting <%= @books.count %> unique books.</h6>
+    <h6>Total book count: <%= @total_copies %></h6>
     <h6>Average book count per active customer: <%= @average %></h6>
   </div>
   <hr/>

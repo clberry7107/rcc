@@ -55,6 +55,19 @@
         <td>Last Updated</td>
         <td><%= @subscriber.updated_at %></td>
       </tr>
+      <tr>
+        <td>Active</td>
+        <td><%= @subscriber.active ? "Active" : "Suspended" %></td>
+        <td><% if @subscriber.active %>
+              <%= button_to "Suspend Subscriber" , subscriber_path(@subscriber), 
+                  :method => :delete, :data => {:confirm => "This will make #{@subscriber.full_name} inactive and change all subsciption counts to 0.\nAre you sure?"}, 
+                  :class => "button warning" %></td>
+            <% else %>
+              <td><%= button_to "Activate Subscriber" , subscriber_path(@subscriber, {:subscriber => {:active => true}, :reactivate => true}), 
+                      :method => :patch, :data => {:confirm => "This will make #{@subscriber.full_name} active and change all subsciption counts to 1.\nAre you sure?"}, 
+                      :class => "button info" %></td>
+            <% end %>
+      </tr>
     </table>
   </div>
   <div>

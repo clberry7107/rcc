@@ -28,7 +28,7 @@
         </tr>
         <tr>
           <td><%= f.label "Store Stock Quantity:" %></td>
-          <td><%= f.number_field :stock_quantity %></td>
+          <td><%= f.number_field :stock_quantity, :min => 0 %></td>
         </tr>
       <% end %>
     </table>

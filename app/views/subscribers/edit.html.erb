@@ -1,7 +1,7 @@
 <div class="row">
   <h1>Update Subscriber Details</h1>
   <%= render 'form' %>
-  <%= link_to 'Show', @subscriber %> |
-  <%= link_to 'Back', subscribers_path %> 
+  <%= button_to 'Cancel',subscriber_path(@subscriber), method: :get, class: "button warning" %>
+  </div>
 </div>
 

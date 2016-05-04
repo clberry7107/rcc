@@ -16,7 +16,7 @@ class AccessPolicy
     # In this case an administrator.
     #
     role :admin, { is_admin: true } do
-      can [:create, :update, :destroy], Subscriber
+      can [:suspend, :create, :update, :destroy], Subscriber
       can [:create, :update, :destroy], Book
       can [:view, :create, :update, :destroy, :change_user_type], User
       can :upload_data
@@ -27,7 +27,7 @@ class AccessPolicy
     # More privileged role, applies to registered users.
     #
     role :clerk, proc { |user| user.clerk? } do
-      can [:view, :create, :update], Subscriber
+      can [:suspend, :view, :create, :update], Subscriber
       can :view, Book
     end
 

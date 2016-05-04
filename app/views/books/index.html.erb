@@ -8,7 +8,7 @@
       <div class="large-3 column">
         <h6>Total Books: <%= @books.count %></h6>
         <% if can? :add_book %>
-          <h6><%= button_to "Add Book", new_book_path, class: "button success" %> </h6>
+          <h6><%= button_to "Add Book", new_book_path, method: :get, class: "button success" %> </h6>
         <% end %>
       </div>
       <div class="button-group large-3 column">

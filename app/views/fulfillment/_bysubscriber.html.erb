@@ -7,7 +7,7 @@
   <td></td>
   <td><table>
     <% @subscriber.books.each do |book| %>
-      <% if (@q = @subscriber.book_quantity(book)) > 0 %>
+      <% if (@q = @subscriber.book_quantity(book)) > 0 && book.active %>
         <tr>
           <td><%= book.title %></td>
           <td><%= @q %></td>

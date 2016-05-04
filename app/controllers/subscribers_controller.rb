@@ -15,8 +15,8 @@ class SubscribersController < ApplicationController
   # GET /subscribers
   # GET /subscribers.json
   def index
-    @subscribers = Subscriber.all.order('last_name ASC')
     authorize! :view, @user
+    @subscribers = Subscriber.all.order('last_name ASC')
   end
 
   # GET /subscribers/1
@@ -58,6 +58,24 @@ class SubscribersController < ApplicationController
   # PATCH/PUT /subscribers/1
   # PATCH/PUT /subscribers/1.json
   def update
+    
+    if params[:reactivate] == "true"
+      @subscriber.active = true
+      @subscriber.save
+      
+      @subscriber.subscribers_books.each do |subscription|
+        subscription.quantity = 1
+        subscription.save
+      end
+      relations = Relationship.where("name_index = ?", @subscriber.index)
+      relations.each do |relation|
+        relation.quantity = 1
+        relation.save
+      end
+      redirect_to subscribers_path, notice: 'Subscriber has been reactivated.'
+      return
+    end
+    
     respond_to do |format|
       if @subscriber.update(subscriber_params)
         format.html { redirect_to @subscriber, notice: 'Subscriber was successfully updated.' }

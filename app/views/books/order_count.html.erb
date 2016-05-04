@@ -13,9 +13,9 @@
     <% @books.each do |book| %>
       <tr>
         <td><%= link_to book.title, book_path(book) %></td>
-        <td><%= @sub = book.order_quantity || 0%></td>
+        <td><%= @sub = book.subscribers_books.sum(:quantity) || 0%></td>
         <td><%= @store = book.stock_quantity || 0 %></td>
-        <td><%= @sub + @store %></td>
+        <td><%= book.order_quantity %></td>
         <td><%= book.notes %></td>
       </tr>
     <% end %>

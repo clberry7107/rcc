@@ -19,14 +19,22 @@
       <% @subscribers.each do |subscriber| %>
       <tr>
         <td><%= link_to subscriber.full_name || "", subscriber_path(subscriber) %></td>
-        <td><%= subscriber.active ? "Active" : "Inactive"%></td>
+        <td><%= subscriber.active ? "Active" : "Suspended"%></td>
         <td><%= link_to subscriber.email || "", subscriber_path(subscriber) %></td>
         <td><%= link_to subscriber.address || "", subscriber_path(subscriber) %></td>
         <td><%= link_to subscriber.city || "", subscriber_path(subscriber) %></td>
         <td><%= link_to subscriber.state || "", subscriber_path(subscriber) %></td>
         <td><%= link_to subscriber.f_zip || "", subscriber_path(subscriber) %></td>
-        <% if can? :destroy, Subscriber %>
-        <td><%= link_to "Delete Subscriber" , subscriber_path(subscriber), :method => :delete, :data => {:confirm => "This will make #{subscriber.full_name} inactive and change all subsciption counts to 0.\nAre you sure?"} %></td>
+        <% if can? :suspend, Subscriber %>
+          <% if subscriber.active %>
+            <td><%= button_to "Suspend Subscriber" , subscriber_path(subscriber), 
+                    :method => :delete, :data => {:confirm => "This will make #{subscriber.full_name} inactive and change all subsciption counts to 0.\nAre you sure?"},
+                    :class => "button warning" %></td>
+          <% else %>
+            <td><%= button_to "Activate Subscriber" , subscriber_path(subscriber, {:subscriber => {:active => true}, :reactivate => true}), 
+                    :method => :patch, :data => {:confirm => "This will make #{subscriber.full_name} active and change all subsciption counts to 1.\nAre you sure?"},
+                    :class => "button info" %></td>
+          <% end %>
         <% end %>
       </tr>
       <% end %>
