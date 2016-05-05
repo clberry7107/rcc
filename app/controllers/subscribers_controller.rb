@@ -76,14 +76,18 @@ class SubscribersController < ApplicationController
       return
     end
     
-    respond_to do |format|
-      if @subscriber.update(subscriber_params)
-        format.html { redirect_to @subscriber, notice: 'Subscriber was successfully updated.' }
-        format.json { render :show, status: :ok, location: @subscriber }
-      else
-        format.html { render :edit }
-        format.json { render json: @subscriber.errors, status: :unprocessable_entity }
+    if params[:commit]
+      respond_to do |format|
+        if @subscriber.update(subscriber_params)
+          format.html { redirect_to @subscriber, notice: 'Subscriber was successfully updated.' }
+          format.json { render :show, status: :ok, location: @subscriber }
+        else
+          format.html { render :edit }
+          format.json { render json: @subscriber.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to subscriber_path(@subscriber), notice: 'Edit canceled.'
     end
   end
 

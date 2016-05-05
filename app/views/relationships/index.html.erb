@@ -4,9 +4,16 @@
 <div>
   <h2>Current Relationships</h2>
   <h3>Relationship Count: <%= @relationships.count %></h3>
+  <!--<div class="button-group large-3 column">-->
+  <!--  <h6>Sort by Active status:</h6>-->
+  <!--  <%= button_to "All", relationships_status_path({:active => 'all'}), class: "button success" %>-->
+  <!--  <%= button_to "Active", relationships_status_path({:active => 'true'}), class: "button success" %>-->
+  <!--  <%= button_to "Inactive", relationships_status_path({:active => 'false'}), class: "button success" %>-->
+  <!--</div>-->
   <table> 
     <tr>
       <th>Book Title</th>
+      <th>Active Title?</th>
       <th>Subscriber</th>
       <th>Quantity</th>
       <th>Date created</th>
@@ -14,11 +21,12 @@
     <% @relationships.each do |relationship| %>
     <tr>
       <td><%= link_to relationship.book.title, book_path(relationship.book_id) %></td>
+      <td><%= relationship.book.active ? "Active" : "Inactive" %></td>
       <td><%= link_to relationship.subscriber.full_name, subscriber_path(relationship.subscriber_id) %></td>
       <td><%= relationship.quantity %></td>
       <td><%= relationship.date_added %></td>
-      <td><%= link_to "Delete", relationship_path(relationship), method: :delete %></td>
-    </tr>
+      <td><%= link_to "Delete", relationship_path(relationship), method: :delete, :data => {:confirm => "This action will delete this relationship.\nAre you sure?"} %></td>
+    </tr>    
 
     <% end %>
   </table>

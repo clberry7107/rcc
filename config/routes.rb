@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :books
   
   post 'relationships/import' => 'relationships#import'
+  post 'relationships/status' => 'relationships#index'
   resources :relationships
   
   post 'subscriptions/update' => 'subscriptions#update'

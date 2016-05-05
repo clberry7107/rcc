@@ -4,6 +4,7 @@ class RelationshipsController < ApplicationController
   
   def import
     Relationship.delete_all
+    SubscribersBook.delete_all
     Relationship.import(params[:file])
     redirect_to relationships_path, notice: "#{Relationship.count} relationships imported."
   end
@@ -11,7 +12,7 @@ class RelationshipsController < ApplicationController
   # GET /relationships
   # GET /relationships.json
   def index
-    @relationships = Relationship.all.order('created_at DESC')
+    @relationships = Relationship.all.order("created_at DESC")
   end
 
   # GET /relationships/1
@@ -61,6 +62,7 @@ class RelationshipsController < ApplicationController
   # DELETE /relationships/1
   # DELETE /relationships/1.json
   def destroy
+    SubscribersBook.where("subscriber_id = ? AND book_id = ?", Subscriber.find_by(index: @relationship.name_index).id, Book.find_by(index: @relationship.book_index)).delete_all
     @relationship.destroy
     respond_to do |format|
       format.html { redirect_to relationships_url, notice: 'Relationship was successfully destroyed.' }

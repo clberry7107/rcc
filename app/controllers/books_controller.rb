@@ -26,11 +26,11 @@ class BooksController < ApplicationController
   def index
     case params[:active] 
       when "true"
-        @books = Book.all.where('active = ?', true).order("LOWER(title)").includes(:subscribers)
+        @books = Book.all.where(active: :true).order("LOWER(title)")
       when "false"
-        @books = Book.all.where('active = ?', false).order("LOWER(title)").includes(:subscribers)
+        @books = Book.all.where(:active => false).order("LOWER(title)")
       else
-        @books = Book.all.order("LOWER(title)").includes(:subscribers)
+        @books = Book.all.order("LOWER(title)")
     end
   end
 
@@ -69,14 +69,18 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-    respond_to do |format|
-      if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
-        format.json { render :show, status: :ok, location: @book }
-      else
-        format.html { render :edit }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+    if params[:commit]
+      respond_to do |format|
+        if @book.update(book_params)
+          format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+          format.json { render :show, status: :ok, location: @book }
+        else
+          format.html { render :edit }
+          format.json { render json: @book.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to book_path(@book), notice: 'Edit canceled.'
     end
   end
 

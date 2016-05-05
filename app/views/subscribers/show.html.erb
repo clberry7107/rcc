@@ -91,7 +91,7 @@
           <th>Quantity</th>
         </tr>
         <% @subscriber.books.order(:title).each do |book| %>
-        <% if book.active == true %>
+        <% if book.active? %>
           <tr>
             <td><%= link_to book.title, book_path(book) %></td>
             <td><%= @subscriber.book_quantity(book) %></td>
