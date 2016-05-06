@@ -12,7 +12,18 @@ class RelationshipsController < ApplicationController
   # GET /relationships
   # GET /relationships.json
   def index
-    @relationships = Relationship.all.order("created_at DESC")
+    if params[:sort]
+      case params[:sort]
+        when 'book'
+          @relationships = Relationship.all.order('book_index')
+        when 'subscriber'
+          @relationships = Relationship.all.order('name_index')
+        else
+          @relationships = Relationship.all.order("created_at DESC")
+      end
+    else
+      @relationships = Relationship.all.order("created_at DESC")
+    end
   end
 
   # GET /relationships/1

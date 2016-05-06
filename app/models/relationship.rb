@@ -1,5 +1,7 @@
 class Relationship < ActiveRecord::Base
-    
+  
+  validates_presence_of :book_index, :name_index
+  
   def self.remove_newline(value)
     if !value.chr.is_number? 
       value = value.gsub!("\n", ", ") unless value.include?("\"")

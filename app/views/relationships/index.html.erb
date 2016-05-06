@@ -4,12 +4,11 @@
 <div>
   <h2>Current Relationships</h2>
   <h3>Relationship Count: <%= @relationships.count %></h3>
-  <!--<div class="button-group large-3 column">-->
-  <!--  <h6>Sort by Active status:</h6>-->
-  <!--  <%= button_to "All", relationships_status_path({:active => 'all'}), class: "button success" %>-->
-  <!--  <%= button_to "Active", relationships_status_path({:active => 'true'}), class: "button success" %>-->
-  <!--  <%= button_to "Inactive", relationships_status_path({:active => 'false'}), class: "button success" %>-->
-  <!--</div>-->
+  <div class="button-group large-3 column">
+    <h6>Sort by:</h6>
+    <%= button_to "Book", relationships_sort_path({:sort => 'book'}), class: "button success" %>
+    <%= button_to "Subscriber", relationships_sort_path({:sort => 'subscriber'}), class: "button success" %>
+  </div>
   <table> 
     <tr>
       <th>Book Title</th>
@@ -20,7 +19,7 @@
     </tr>
     <% @relationships.each do |relationship| %>
     <tr>
-      <td><%= link_to relationship.book.title, book_path(relationship.book_id) %></td>
+      <td><%= link_to relationship.book.title, book_path(relationship.book) %></td>
       <td><%= relationship.book.active ? "Active" : "Inactive" %></td>
       <td><%= link_to relationship.subscriber.full_name, subscriber_path(relationship.subscriber_id) %></td>
       <td><%= relationship.quantity %></td>

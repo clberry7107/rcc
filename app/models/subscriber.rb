@@ -9,7 +9,7 @@ class Subscriber < ActiveRecord::Base
   end
   
   before_validation(on: :create) do
-    check_formating unless Proc.new {|subscriber| subscriber.importing }
+    check_formating 
   end
   
   def check_formating
@@ -21,8 +21,8 @@ class Subscriber < ActiveRecord::Base
     self.last_name.capitalize!
   end
   
-  validates :first_name, :last_name, presence: true
-  validate :any_present?
+  validates :first_name, :last_name, presence: true 
+  validate :any_present? 
 
   def any_present?
     if %w(home_phone work_phone mobile_phone email).all?{|attr| self[attr].blank?}
@@ -46,20 +46,21 @@ class Subscriber < ActiveRecord::Base
     f = file.read
     lines = f.each_line('\n')
     lines.each {|line| remove_newline(line)}
-    create_subsriber(file)
+    @subscribers = create_subsribers(file)
+    return @subscribers
   end
     
-  def self.create_subsriber(file)
+  def self.create_subsribers(file)
+    @subscribers = Array.new
     CSV.foreach(file.path, headers: true, encoding: 'iso-8859-1') do |row|
       if row['Type'] == 'C'
-        if !add_subsriber(row)
-          import.errors << "#{row.to_s} failed to import"
-        end
+        @subscribers << add_subscriber(row)
       end 
-    end  
+    end 
+    return @subscribers
   end
   
-  def self.add_subsriber(row)
+  def self.add_subscriber(row)
     subscriber = Subscriber.new
     subscriber.index = row['Name Index'].to_i
     subscriber.last_name = row['Last Name'] 
@@ -76,7 +77,7 @@ class Subscriber < ActiveRecord::Base
     subscriber.subscriber_type = row['Type']
     subscriber.notes = remove_newline(row['Notes']) unless row['Notes'].nil?
     subscriber.importing = true
-    subscriber.save ? true : false
+    return subscriber
   end 
   
   def full_name

@@ -5,11 +5,16 @@ class SubscribersController < ApplicationController
 
 
   def import
+    @errors = Array.new
     Relationship.delete_all
     SubscribersBook.delete_all
     Subscriber.delete_all
-    Subscriber.import(params[:file])
-    redirect_to subscribers_path, notice: "#{Subscriber.count} subscribers imported."
+    Subscriber.import(params[:file]).each do |subscriber|
+      subscriber.save validate: false
+    end
+    
+    @subscribers = Subscriber.all.order('last_name ASC')
+    render :index
   end
   
   # GET /subscribers
@@ -49,7 +54,7 @@ class SubscribersController < ApplicationController
         format.json { render :show, status: :created, location: @subscriber }
       else
         @subscriber.index = (Subscriber.maximum(:index)) + 1
-      format.html { render :new }
+        format.html { render :new }
         format.json { render json: @subscriber.errors, status: :unprocessable_entity }
       end
     end

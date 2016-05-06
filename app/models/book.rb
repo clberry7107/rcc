@@ -31,7 +31,7 @@ class Book < ActiveRecord::Base
     book.index = row['Book Index']
     book.title = row['Book'] 
     book.notes = remove_newline(row['Notes']) unless row['Notes'].nil?
-    book.active = false unless row['Active'].to_i == 1
+    book.active = false unless row['Active'].to_i == 0
     book.save
   end rescue nil
   
