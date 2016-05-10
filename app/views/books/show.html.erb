@@ -49,7 +49,7 @@
        <% @book.subscribers.order(:last_name).each do |subscriber| %>
          <tr>
            <td><%= link_to subscriber.full_name, subscriber_path(subscriber) %></td>
-           <td><%= subscriber.book_quantity(@book) %></td>
+           <td><%= subscriber.subscribers_books.find_by(book_id: @book.id).quantity %></td>
           </tr>
        <% end %>
       </table>

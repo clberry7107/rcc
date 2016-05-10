@@ -19,23 +19,28 @@ Rails.application.routes.draw do
   resources :newseries 
   
   post 'subscribers/import' => 'subscribers#import'
-  post 'subscriber/edit_subscriptions' =>'subscribers#edit_subscriptions'
   resources :subscribers
   
   post 'books/import' => 'books#import'
   get 'books/order_count' => 'books#order_count'
   post 'books/status' => 'books#index'
-  
   resources :books
   
   post 'relationships/import' => 'relationships#import'
   post 'relationships/sort' => 'relationships#index'
   resources :relationships
   
+  get 'subscriptions/index' => 'subscriptions#index'
   post 'subscriptions/update' => 'subscriptions#update'
   post 'subscriptions/add' => 'subscriptions#new'
   post 'subscriptions/create' => 'subscriptions#create'
-  get 'subscriptions/index' => 'subscriptions#index'
+  post 'subscriber/edit_subscriptions' =>'subscribers#edit_subscriptions'
+  
+  get 'book_subscribers/index' => 'book_subscribers#index'
+  post 'book_subscribers/add' => 'book_subscribers#new'
+  post 'book_subscribers/edit' => 'book_subscribers#edit'
+  post 'book_subscribers/create' => 'book_subscribers#create'
+  post 'book_subscribers/update' => 'book_subscribers#update'
   
   
   resources :fulfillment

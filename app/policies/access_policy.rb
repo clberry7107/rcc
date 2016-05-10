@@ -17,7 +17,7 @@ class AccessPolicy
     #
     role :admin, { is_admin: true } do
       can [:suspend, :create, :update, :destroy], Subscriber
-      can [:create, :update, :destroy], Book
+      can [:create, :update, :destroy, :suspend], Book
       can [:view, :create, :update, :destroy, :change_user_type], User
       can :upload_data
       can :add_book

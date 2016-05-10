@@ -21,16 +21,20 @@
     <table> 
       <tr>
         <th>Title</th>
-        <th>Notes</th>
-        <th>Active</th>
+        <th>Stock Quantity</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Active?</th>
       </tr>
       <% @books.each do |book| %>
         <tr>
           <td><%= link_to book.title, book_path(book) %></td>
-          <td><%= book.notes %></td>
-          <td><%= book.active %></td>
-        </tr>
-      <% end %>
+          <td><%= book.stock_quantity %></td>
+          <td><%= button_to "Change Stock Quantity", edit_book_path(book), class: "button info", method: :get %></td>
+          <td><%= button_to "Add Subscribers", book_subscribers_add_path(:id => book.id), class: "button info" %></td>
+          <td><%= button_to "Edit Subscribers", book_subscribers_edit_path(id: book.id), class: "button info" %></td>
+          
     </table>
   </div>
 </div>
