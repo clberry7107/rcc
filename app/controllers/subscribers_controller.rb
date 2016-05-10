@@ -119,9 +119,6 @@ class SubscribersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_subscriber
       @subscriber = Subscriber.find(params[:id])
-      
-      rescue
-        @subscriber = Subscriber.find_by index: params[:id]
     end
     
     def set_user

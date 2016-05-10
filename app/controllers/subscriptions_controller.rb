@@ -7,7 +7,7 @@ class SubscriptionsController < ApplicationController
   
   def new
     @subscriber = Subscriber.find(params[:subscriber])
-    @books = Book.all.where("active = ?", true).order('title ASC')
+    @books = Book.all.where("active = ?", :true).order('title ASC')
     render 'subscribers/add_subscription'
   end
   

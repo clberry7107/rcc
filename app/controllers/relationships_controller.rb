@@ -15,9 +15,9 @@ class RelationshipsController < ApplicationController
     if params[:sort]
       case params[:sort]
         when 'book'
-          @relationships = Relationship.all.order('book_index')
+          @relationships = Relationship.all.order('book_id')
         when 'subscriber'
-          @relationships = Relationship.all.order('name_index')
+          @relationships = Relationship.all.order('name_id')
         else
           @relationships = Relationship.all.order("created_at DESC")
       end
