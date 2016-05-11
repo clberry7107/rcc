@@ -87,10 +87,16 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
-    @book.update(active: :false)
-    respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book has been marked inactive.' }
-      format.json { head :no_content }
+    if @book.update(active: :false)
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: 'Book has been marked inactive.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to book_url, notice: 'An error occured while updating.  Check book details.' }
+        format.json { head :no_content }
+      end
     end
   end
 

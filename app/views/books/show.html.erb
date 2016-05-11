@@ -3,8 +3,17 @@
 </div>
 <div class="row">
   <h1>Book Details</h1>
-  <h4><%= link_to "Previous", book_path(@book.previous_book) %> |
-  <%= link_to "Next", book_path(@book.next_book) %></h4>
+    <div class="button-group">
+      <%= button_to 'Back to Index', books_path, method: :get, :class => "button info" %>
+      <%= button_to 'Edit Details', edit_book_path(@book), method: :get, :class => "button info" %>
+      <%= button_to "Edit Subscriptions", book_subscribers_edit_path(:id => @book.id), :class => "button info" %>
+      <%= button_to "Add Subscribers", {:controller => "book_subscribers", :action => "new", :id => @book.id}, :class => "button info" %>
+      <%= button_to "Change Stock Quantity", edit_book_path(@book), class: "button info", method: :get %>
+    </div>
+    <div class="button-group">
+      <%= button_to "<< Previous", book_path(@book.previous_book), :method => :get, :class => "button success"  %> 
+      <%= button_to "Next >>", book_path(@book.next_book), :method => :get, :class => "button success" %>
+    </div>
   <div>
     <table>
       <tr>
@@ -34,7 +43,6 @@
   <hr/>
   <div class="button-group">
     <h4>Store Stock Order Quantity: <%= @book.stock_quantity %></h4>
-    <%= button_to "Change Stock Quantity", edit_book_path(@book), class: "button info", method: :get %>
   </div>
   <hr>
   <div>

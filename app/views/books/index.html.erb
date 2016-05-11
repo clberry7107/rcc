@@ -34,7 +34,20 @@
           <td><%= button_to "Change Stock Quantity", edit_book_path(book), class: "button info", method: :get %></td>
           <td><%= button_to "Add Subscribers", book_subscribers_add_path(:id => book.id), class: "button info" %></td>
           <td><%= button_to "Edit Subscribers", book_subscribers_edit_path(id: book.id), class: "button info" %></td>
-          
+          <% if can? :suspend, Book %>
+            <% if book.active %>
+              <td><%= button_to "Suspend Book" , book_path(book), 
+                      :method => :delete, :data => {:confirm => "This will make #{book.title} inactive.\nAre you sure?"},
+                      :class => "button warning" %></td>
+            <% else %>
+              <td><%= button_to "Activate Book" , book_path(book, {:book => {:active => true}, :reactivate => true}), 
+                      :method => :patch, :data => {:confirm => "This will make #{book.title} active.\nAre you sure?"},
+                      :class => "button info" %></td>
+            <% end %>
+          <% end %>
+   
+          </tr>
+        <% end %>
     </table>
   </div>
 </div>

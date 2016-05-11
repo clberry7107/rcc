@@ -69,11 +69,4 @@ class Relationship < ActiveRecord::Base
     end
   end
   
-  def book
-    Book.find_by index: self.book_index
-  end
-  
-  def subscriber
-    Subscriber.find_by index: self.name_index
-  end
 end
