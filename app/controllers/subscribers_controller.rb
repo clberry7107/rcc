@@ -67,16 +67,7 @@ class SubscribersController < ApplicationController
     if params[:reactivate] == "true"
       @subscriber.active = true
       @subscriber.save
-      
-      @subscriber.subscribers_books.each do |subscription|
-        subscription.quantity = 1
-        subscription.save
-      end
-      relations = Relationship.where("name_index = ?", @subscriber.index)
-      relations.each do |relation|
-        relation.quantity = 1
-        relation.save
-      end
+
       redirect_to subscribers_path, notice: 'Subscriber has been reactivated.'
       return
     end

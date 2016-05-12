@@ -41,14 +41,16 @@ class SubscriptionsController < ApplicationController
   end
   
   def update
+    sbs = SubscribersBook.where('subscriber_id = ?', @subscriber.id)
     params[:q].each do |k,v|
-      relation = Relationship.where("book_index = ? AND name_index = ?", Book.find(k).index, @subscriber.index).limit(1)
-      if v == '0'
-        sb = @subscriber.subscribers_books.where("book_id = ?", k).limit(1)
-        SubscribersBook.destroy(sb) unless sb.empty?
-        Relationship.destroy(relation.first.id) unless relation.empty?
+      sb = sbs.find_by(book_id: k)
+      next if sb.nil?
+      
+      case v 
+       when "0"
+        sb.delete
       else
-        Relationship.update(relation.first.id, :quantity => v)
+        sb.update(quantity: v)
       end
     end
     

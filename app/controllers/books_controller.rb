@@ -69,6 +69,13 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+    if params[:reactivate] == "true"
+      @book.active = true
+      @book.save
+
+      redirect_to books_path, notice: "#{@book.title} has been reactivated."
+      return
+    end
     if params[:commit]
       respond_to do |format|
         if @book.update(book_params)
@@ -89,7 +96,7 @@ class BooksController < ApplicationController
   def destroy
     if @book.update(active: :false)
       respond_to do |format|
-        format.html { redirect_to books_url, notice: 'Book has been marked inactive.' }
+        format.html { redirect_to books_url, notice: "#{@book.title} has been marked inactive." }
         format.json { head :no_content }
       end
     else

@@ -11,7 +11,7 @@
           <th>Order Quantity</th>
         </tr>
         <% @books.each do |book| %>
-          <% if @subscriber.book_quantity(book) == 0 %>
+          <% if !@subscriber.books.exists?(book) %>
           <tr>
             <td><%= link_to book.title, book_path(book) %></td>
             <td><%= label_tag(:q, "Quantity:") %>

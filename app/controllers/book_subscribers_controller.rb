@@ -22,15 +22,20 @@ class BookSubscribersController < ApplicationController
   end
   
   def update
-    params[:q].each do |subscriber, quantity|
-      relationships = @book.subscribers_books.where(subscriber_id: subscriber)
-      relationships.each do |r|
-        r.delete unless !r.quantity.nil?
+    sbs = SubscribersBook.where('book_id = ?', @book.id)
+    params[:q].each do |k,v|
+      sb = sbs.find_by(subscriber_id: k)
+      next if sb.nil?
+      
+      case v 
+       when "0"
+        sb.delete
+      else
+        sb.update(quantity: v)
       end
-      relationship = @book.subscribers_books.where(subscriber_id: subscriber).first
-      relationship.update(quantity: quantity) unless relationship.nil?
     end
-    redirect_to books_path
+    
+    redirect_to book_path(@book)
   end
 
   def destroy
