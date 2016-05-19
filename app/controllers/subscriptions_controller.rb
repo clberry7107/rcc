@@ -16,26 +16,30 @@ class SubscriptionsController < ApplicationController
       books << {book: k, quantity: v} unless v == "" || v == 0
     end
     
-    relationships = Array.new
     books.each do |book|
-        relationships << {
-                        "name_index" => Subscriber.find(params[:subscriber_id]).index, 
-                        "book_index" => Book.find(book[:book]).index, 
-                        "quantity" => book[:quantity],
-                        "date_added" => Date.today
-                        }
-      
+      SubscribersBook.create(subscriber_id: @subscriber.id, book_id: book[:book], quantity: book[:quantity])
     end
     
-    relationships.each do |relationship|
-      r = Relationship.create(relationship)
+    # relationships = Array.new
+    # books.each do |book|
+    #     relationships << {
+    #                     "name_index" => Subscriber.find(params[:subscriber_id]).index, 
+    #                     "book_index" => Book.find(book[:book]).index, 
+    #                     "quantity" => book[:quantity],
+    #                     "date_added" => Date.today
+    #                     }
       
-      relation = SubscribersBook.new
-      relation.subscriber_id = params[:subscriber_id] 
-      relation.book_id = (Book.find_by(index: r.book_index)).id
-      relation.save
+    # end
+    
+    # relationships.each do |relationship|
+    #   r = Relationship.create(relationship)
       
-    end
+    #   relation = SubscribersBook.new
+    #   relation.subscriber_id = params[:subscriber_id] 
+    #   relation.book_id = (Book.find_by(index: r.book_index)).id
+    #   relation.save
+      
+    # end
     
     redirect_to subscriber_path(@subscriber)
   end
