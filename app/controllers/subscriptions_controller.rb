@@ -19,28 +19,7 @@ class SubscriptionsController < ApplicationController
     books.each do |book|
       SubscribersBook.create(subscriber_id: @subscriber.id, book_id: book[:book], quantity: book[:quantity])
     end
-    
-    # relationships = Array.new
-    # books.each do |book|
-    #     relationships << {
-    #                     "name_index" => Subscriber.find(params[:subscriber_id]).index, 
-    #                     "book_index" => Book.find(book[:book]).index, 
-    #                     "quantity" => book[:quantity],
-    #                     "date_added" => Date.today
-    #                     }
-      
-    # end
-    
-    # relationships.each do |relationship|
-    #   r = Relationship.create(relationship)
-      
-    #   relation = SubscribersBook.new
-    #   relation.subscriber_id = params[:subscriber_id] 
-    #   relation.book_id = (Book.find_by(index: r.book_index)).id
-    #   relation.save
-      
-    # end
-    
+
     redirect_to subscriber_path(@subscriber)
   end
   
