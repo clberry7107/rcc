@@ -129,5 +129,16 @@ class Subscriber < ActiveRecord::Base
     return count
   end
   
+  def total_books
+    total = 0
+    self.subscribers_books.each do |book|
+      if Book.find(book.book_id).active?
+        total += book.quantity
+      end
+    end
+    return total
+  end
+  
+  
   
 end

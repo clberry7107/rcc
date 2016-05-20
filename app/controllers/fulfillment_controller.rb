@@ -5,7 +5,7 @@ class FulfillmentController < ApplicationController
 
     @subscribers = Array.new
     Subscriber.order(:last_name).all.each do |subscriber|
-      @subscribers << subscriber unless !subscriber.active || subscriber.total_books == 0 
+      @subscribers << subscriber unless !subscriber.active || subscriber.active_subscriptions == 0 
     end
   
     @books = Array.new
