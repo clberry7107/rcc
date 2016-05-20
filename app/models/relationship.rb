@@ -17,42 +17,41 @@ class Relationship < ActiveRecord::Base
     f = file.read
     lines = f.each_line('\n')
     lines.each {|line| remove_newline(line)}
-    create_relationship(file)
+    return create_relationships(file)
   end
     
-  def self.create_relationship(file)
+  def self.create_relationships(file)
+    relations = Array.new
+    
     CSV.foreach(file.path, headers: true, encoding: 'iso-8859-1') do |row|
-      add_relationship(row)
+      relations << add_relationship(row)
     end  
+    
+    return relations
   end
   
   def self.add_relationship(row)
+    
     relationship = Relationship.new
     relationship.book_index = row['Book Index']
     relationship.name_index = row['Name Index'] 
     relationship.quantity = row['Quantity']
     relationship.date_added = row['Date Input']
-    if relationship.transfer_relationship(relationship.name_index, relationship.book_index, relationship.quantity)
-      relationship.save
-    end
+    return relationship.transfer_relationship(relationship.name_index, relationship.book_index, relationship.quantity)
   end rescue nil
   
   def transfer_relationship(name, book, quantity)
-    db_book = (Book.find_by index: book)
+    db_book = (Book.find_by(index: book))
     book_id = db_book.id unless db_book.nil?
     db_subscriber = (Subscriber.find_by index: name)
     subscriber_id = db_subscriber.id unless db_subscriber.nil?
     
-    if !subscriber_id.nil?
-      relation = SubscribersBook.new
-      relation.subscriber_id = subscriber_id 
-      relation.book_id = book_id
-      relation.quantity = quantity
-      relation.save
-      return true
-    else
-      return false
-    end
+    relation = SubscribersBook.new
+    relation.subscriber_id = subscriber_id 
+    relation.book_id = book_id
+    relation.quantity = quantity
+    
+    return relation
   end
   
   def book_id

@@ -5,8 +5,11 @@ class RelationshipsController < ApplicationController
   def import
     Relationship.delete_all
     SubscribersBook.delete_all
-    Relationship.import(params[:file])
-    redirect_to relationships_path, notice: "#{Relationship.count} relationships imported."
+    # Relationship.import(params[:file])
+    Relationship.import(params[:file]).each do |relationship|
+      relationship.save
+    end
+    redirect_to relationships_path, notice: "#{SubscribersBook.count} relationships imported."
   end
 
   # GET /relationships

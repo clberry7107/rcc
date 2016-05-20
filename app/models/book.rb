@@ -2,7 +2,8 @@ class Book < ActiveRecord::Base
   has_many :subscribers_books
   has_many :subscribers, through: :subscribers_books
   
-  validates_presence_of :title
+  validates_presence_of :title, :index
+  validates_uniqueness_of :title, :index
   
   def self.remove_newline(value)
     if !value.chr.is_number? 
@@ -33,7 +34,7 @@ class Book < ActiveRecord::Base
     book.index = row['Book Index']
     book.title = row['Book'] 
     book.notes = remove_newline(row['Notes']) unless row['Notes'].nil?
-    book.active = false unless row['Active'].to_i == 1
+    book.active = false unless row['Active'] == "1"
     book.save
   end rescue nil
   
