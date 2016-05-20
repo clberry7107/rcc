@@ -7,6 +7,7 @@ class SubscriptionsController < ApplicationController
   
   def new
     @books = Book.all.where("active = ?", :true).order('title ASC')
+    session[:request_page] = request.env["HTTP_REFERER"] || subscriber_path(@subscriber)
     render 'subscribers/add_subscription'
   end
   
@@ -20,7 +21,7 @@ class SubscriptionsController < ApplicationController
       SubscribersBook.create(subscriber_id: @subscriber.id, book_id: book[:book], quantity: book[:quantity])
     end
 
-    redirect_to subscriber_path(@subscriber)
+    redirect_to session[:request_page]
   end
   
   def update
@@ -37,7 +38,7 @@ class SubscriptionsController < ApplicationController
       end
     end
     
-    redirect_to subscriber_path(@subscriber)
+    redirect_to session[:request_page]
   end
   
   def destroy

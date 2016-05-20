@@ -9,7 +9,7 @@
       <%= button_to "Add Books", {:controller => "subscriptions", :action => "new", :subscriber => @subscriber.id}, :class => "button info" %>
     </div>
     <div class="button-group">
-      <%= button_to "<< Previous", subscriber_path(@subscriber.previous_subscriber), :method => :get, :class => "button success"  %> 
+      <%= button_to "<< Previous", subscriber_path(@subscriber.previous_subscriber), :method => :get, :class => "button success" %> 
       <%= button_to "Next >>", subscriber_path(@subscriber.next_subscriber), :method => :get, :class => "button success" %>
     </div>
     <h1>Subscriber Details</h1>

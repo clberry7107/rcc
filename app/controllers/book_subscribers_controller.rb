@@ -7,10 +7,12 @@ class BookSubscribersController < ApplicationController
   
   def new
     @subscribers = Subscriber.all.where("active = ?", :true).order('last_name ASC').reject{ |subscriber| @book.subscribers.include?(subscriber)}
+    session[:request_page] = request.env['HTTP_REFERER'] || relationships_path
     render 'books/add_subscribers'
   end
   
   def edit
+    session[:request_page] = request.env['HTTP_REFERER'] || book_path(@book)
     render 'books/edit_subscribers'
   end
   
@@ -18,7 +20,7 @@ class BookSubscribersController < ApplicationController
     params[:q].each do |subscriber, quantity|
       @book.subscribers_books.create(subscriber_id: subscriber, quantity: quantity) unless quantity.empty? || quantity == "0"
     end
-    redirect_to books_path
+    redirect_to session[:request_page]
   end
   
   def update
@@ -35,7 +37,7 @@ class BookSubscribersController < ApplicationController
       end
     end
     
-    redirect_to book_path(@book)
+    redirect_to session[:request_page]
   end
 
   def destroy

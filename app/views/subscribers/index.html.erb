@@ -26,7 +26,11 @@
         <td><%= link_to subscriber.city || "", subscriber_path(subscriber) %></td>
         <td><%= link_to subscriber.state || "", subscriber_path(subscriber) %></td>
         <td><%= link_to subscriber.f_zip || "", subscriber_path(subscriber) %></td>
-        <td><%= button_to "Edit Subscriptions", subscriber_edit_subscriptions_path(:id => subscriber.id), :class => "button info" %></td>
+        <% if subscriber.books.count > 0 %>
+          <td><%= button_to "Edit Subscriptions", subscriber_edit_subscriptions_path(:id => subscriber.id), :class => "button info" %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= button_to "Add Books", {:controller => "subscriptions", :action => "new", :subscriber => subscriber.id}, :class => "button info" %></td>
         <% if can? :suspend, Subscriber %>
           <% if subscriber.active %>

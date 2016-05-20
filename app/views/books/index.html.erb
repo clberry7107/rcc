@@ -33,7 +33,11 @@
           <td><%= book.stock_quantity %></td>
           <td><%= button_to "Change Stock Quantity", edit_book_path(book), class: "button info", method: :get %></td>
           <td><%= button_to "Add Subscribers", book_subscribers_add_path(:id => book.id), class: "button info" %></td>
-          <td><%= button_to "Edit Subscribers", book_subscribers_edit_path(id: book.id), class: "button info" %></td>
+          <% if book.subscribers.count > 0 %>
+            <td><%= button_to "Edit Subscribers", book_subscribers_edit_path(id: book.id), class: "button info" %></td>
+          <% else %>
+            <td></td>  
+          <% end %>
           <% if can? :suspend, Book %>
             <% if book.active %>
               <td><%= button_to "Suspend Book" , book_path(book), 
