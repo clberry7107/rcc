@@ -2,8 +2,8 @@ class Book < ActiveRecord::Base
   has_many :subscribers_books
   has_many :subscribers, through: :subscribers_books
   
-  validates_presence_of :title, :index
-  validates_uniqueness_of :title, :index
+  validates_presence_of :title
+  validates_uniqueness_of :title
   
   def self.remove_newline(value)
     if !value.chr.is_number? 
