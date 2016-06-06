@@ -10,6 +10,7 @@ class Subscriber < ActiveRecord::Base
   
   before_validation(on: :create) do
     check_formating 
+    valid_name?
   end
   
   def check_formating
@@ -23,6 +24,7 @@ class Subscriber < ActiveRecord::Base
   
   validates :first_name, :last_name, presence: true 
   validate :any_present? 
+  validates :email, uniqueness: true
 
   def any_present?
     if %w(home_phone work_phone mobile_phone email).all?{|attr| self[attr].blank?}
@@ -30,6 +32,11 @@ class Subscriber < ActiveRecord::Base
     end
   end
   
+  def valid_name?
+    if Subscriber.where(["first_name = ? and last_name = ?", self.first_name, self.last_name]).count > 0
+      errors.add :base, "Subscriber name already taken. Please ensure you are not creating a duplicate subscriber."
+    end
+  end
   
   def self.remove_newline(value)
     if !value.chr.is_number? 
