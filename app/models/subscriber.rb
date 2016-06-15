@@ -24,7 +24,7 @@ class Subscriber < ActiveRecord::Base
   
   validates :first_name, :last_name, presence: true 
   validate :any_present? 
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, if: 'email.present?'
 
   def any_present?
     if %w(home_phone work_phone mobile_phone email).all?{|attr| self[attr].blank?}
