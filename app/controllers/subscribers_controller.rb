@@ -21,7 +21,9 @@ class SubscribersController < ApplicationController
   # GET /subscribers.json
   def index
     authorize! :view, @user
-    @subscribers = Subscriber.all.order('last_name ASC')
+    @search = Subscriber.search(params[:q])
+    @search.sorts = "last_name asc"
+    @subscribers = @search.result
   end
 
   # GET /subscribers/1

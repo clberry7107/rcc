@@ -27,6 +27,9 @@ gem 'devise'
 
 gem 'access-granted', '~> 1.0.0'
 
+# Use Ransack for sorting and searching
+gem 'ransack'
+
 group :development do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'

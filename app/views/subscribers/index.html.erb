@@ -7,6 +7,18 @@
     <h2>Current Subscribers</h2>
     <h6>Total Subscribers: <%= @subscribers.count %></h6>
     <h6><%= button_to "Add Subscriber", new_subscriber_path, :method => :get, class: "button success" %></h6>
+          <div class="large-3 column">
+        <%= search_form_for @search do |f| %>
+          <div class="field">
+            <%= f.label :first_name_cont, "First Name Contains" %>
+            <%= f.text_field :first_name_cont %>
+            <%= f.label :last_name_cont, "Last Name Contains" %>
+            <%= f.text_field :last_name_cont %>
+            <%= f.submit "Search", :class => "button success" %>
+            
+          </div>
+         <% end %>
+      </div>
       <table> 
       <tr>
         <th>Name</th>

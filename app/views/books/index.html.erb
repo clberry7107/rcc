@@ -11,13 +11,25 @@
           <h6><%= button_to "Add Book", new_book_path, method: :get, class: "button success" %> </h6>
         <% end %>
       </div>
+      <div class="large-3 column">
+        <%= search_form_for @search do |f| %>
+          <div class="field">
+            <%= f.label :title_cont, "Title Contains" %>
+            <%= f.text_field :title_cont %>
+            <%= f.submit "Search", :class => "button success" %>
+            
+          </div>
+         <% end %>
+      </div>
       <div class="button-group large-3 column">
         <h6>Sort by Acive status:</h6>
         <%= button_to "All", books_status_path({:active => 'all'}), class: "button success" %>
         <%= button_to "True", books_status_path({:active => 'true'}), class: "button success" %>
         <%= button_to "False", books_status_path({:active => 'false'}), class: "button success" %>
       </div>
+
     </div>
+
     <table> 
       <tr>
         <th>Title</th>

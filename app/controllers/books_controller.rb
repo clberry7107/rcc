@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only:[:show, :edit, :update, :destroy]
   
   def import
     Book.delete_all
@@ -25,14 +25,18 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    case params[:active] 
-      when "true"
-        @books = Book.all.where(active: :true).order("LOWER(title)")
-      when "false"
-        @books = Book.all.where(:active => false).order("LOWER(title)")
-      else
-        @books = Book.all.order("LOWER(title)")
-    end
+    @search = Book.search(params[:q])
+    @search.sorts = 'title asc'
+    @books = @search.result
+    
+    # case params[:q[:active]]
+    #   when 0
+    #     @books = @search.where(:active => true)
+    #   when 1
+    #     @books = @search.where(:active => false)
+    #   # else
+    #   #   @books = Book.all.order("LOWER(title)")
+    # end
   end
 
   # GET /books/1
