@@ -2,33 +2,42 @@
   <p id="notice"><%= notice %></p>
 </div>
 <div class="row">
-  <div>
     <h2>Current Book List</h2>
     <div class="row">
       <div class="large-3 column">
-        <h6>Total Books: <%= @books.count %></h6>
+        <h6>Total Books: <%= @total_books %></h6>
         <% if can? :add_book %>
           <h6><%= button_to "Add Book", new_book_path, method: :get, class: "button success" %> </h6>
         <% end %>
       </div>
-      <div class="large-3 column">
-        <%= search_form_for @search do |f| %>
-          <div class="field">
-            <%= f.label :title_cont, "Title Contains" %>
-            <%= f.text_field :title_cont %>
-            <%= f.submit "Search", :class => "button success" %>
-            
-          </div>
-         <% end %>
-      </div>
-      <div class="button-group large-3 column">
-        <h6>Sort by Acive status:</h6>
-        <%= button_to "All", books_status_path({:active => 'all'}), class: "button success" %>
-        <%= button_to "True", books_status_path({:active => 'true'}), class: "button success" %>
-        <%= button_to "False", books_status_path({:active => 'false'}), class: "button success" %>
-      </div>
-
     </div>
+    <div class="row">
+      <h4>Search for book</h4>
+      <div class="row">
+          <%= search_form_for @search do |f| %>
+            <div class="large-2 column">
+              <%= f.label :title_cont, "Title Contains" %>
+            </div>
+            <div class="large-3 column">
+              <%= f.text_field :title_cont %>
+              Search results: <%= @books.count %> Books
+              </div>
+            <div class="large-1 column">
+              <%= f.submit "Search", :class => "button success" %>
+            </div>
+            <div class="large-3 column">
+              
+            </div>
+           <% end %>
+        </div>
+    </div>
+      <!--<div class="button-group large-3 column">-->
+      <!--  <h6>Sort by Acive status:</h6>-->
+      <!--  <%= button_to "All", books_status_path({:active => 'all'}), class: "button success" %>-->
+      <!--  <%= button_to "True", books_status_path({:active => 'true'}), class: "button success" %>-->
+      <!--  <%= button_to "False", books_status_path({:active => 'false'}), class: "button success" %>-->
+      <!--</div>-->
+
 
     <table> 
       <tr>
@@ -66,6 +75,4 @@
         <% end %>
     </table>
   </div>
-</div>
-</div>
 

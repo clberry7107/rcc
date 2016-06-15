@@ -28,7 +28,7 @@ class BooksController < ApplicationController
     @search = Book.search(params[:q])
     @search.sorts = 'title asc'
     @books = @search.result
-    
+    @total_books = Book.count
     # case params[:q[:active]]
     #   when 0
     #     @books = @search.where(:active => true)

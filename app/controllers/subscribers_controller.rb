@@ -24,6 +24,7 @@ class SubscribersController < ApplicationController
     @search = Subscriber.search(params[:q])
     @search.sorts = "last_name asc"
     @subscribers = @search.result
+    @total_subscribers = Subscriber.count
   end
 
   # GET /subscribers/1
