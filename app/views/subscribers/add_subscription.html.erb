@@ -5,11 +5,14 @@
     <%= hidden_field_tag(:subscriber_id, @subscriber.id) %>
     
     <div class="large-10 columns">
-      <table> 
+      <table id="books"> 
+      <thead>
         <tr>
           <th>Title</th>
           <th>Order Quantity</th>
         </tr>
+      </thead>
+      <tbody>
         <% @books.each do |book| %>
           <% if !@subscriber.books.exists?(book) %>
           <tr>
@@ -19,6 +22,7 @@
           </tr>
           <% end %>
         <% end %>
+      </tbody>
       </table>  
     </div>
     <div class="large-2 columns">

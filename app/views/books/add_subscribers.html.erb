@@ -5,11 +5,14 @@
     <%= hidden_field_tag(:id, @book.id) %>
     
     <div class="large-10 columns">
-      <table> 
+      <table id="subscribers">
+        <thead>
         <tr>
           <th>Subscriber</th>
           <th>Order Quantity</th>
         </tr>
+        </thead>
+        <tbody>
         <% @subscribers.each do |subscriber| %>
           <tr>
             <td><%= subscriber.full_name %></td>
@@ -17,6 +20,7 @@
                 <%= number_field(:q, subscriber.id, :step => 1, :min => 0 ) %></td>
           </tr>
         <% end %>
+        </tbody>
       </table>  
     </div>
     <div class="large-2 columns">

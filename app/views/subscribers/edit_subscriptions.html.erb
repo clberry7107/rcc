@@ -6,17 +6,21 @@
   </div>
   <hr/>
   <div class="large-10 columns">
-    <table> 
+    <table id="subscriptions"> 
+    <thead>
       <tr>
         <th>Order Quantity</th>
         <th>Title</th>
       </tr>
+    </thead>
+    <tbody>
       <% @subscriber.books.where('active = ? ', :true).order(:title).each do |book| %>
         <tr>
           <td><%= label_tag(:q, "Quantity:") %>
               <%= number_field(:q, book.id, :step => 1, :min => 0, :value => @subscriber.book_quantity(book)) %></td>
           <td><%= link_to book.title, book_path(book) %></td>
       <% end %>
+    </tbody>
     </table>
   </div>
   <div class="large-2 columns">

@@ -20,15 +20,17 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+# Used for styling
 gem 'foundation-rails'
-
+# Used for authentication
 gem 'devise'
-
+# Used for roles within app
 gem 'access-granted', '~> 1.0.0'
 
 # Use Ransack for sorting and searching
 gem 'ransack'
+# Used for client side datatables
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
 group :development do
   # Use sqlite3 as the database for Active Record
