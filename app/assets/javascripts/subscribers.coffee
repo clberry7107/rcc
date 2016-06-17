@@ -10,7 +10,7 @@ jQuery ->
     
 searchTable = (inputVal) ->
   regExp = new RegExp(inputVal, 'i')
-  table = $('#table')
+  table = $('.search_table')
   table.find('tr').each (index, row) ->
     if index != 0
       allCells = $(row).find('td')
