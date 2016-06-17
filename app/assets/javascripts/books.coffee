@@ -2,6 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-jQuery ->
-  $('#subscribers').dataTable()
-  $('#edit_subscribers').dataTable()
+# jQuery ->
+#   $('#subscribers').dataTable()
+#   $('#edit_subscribers').dataTable()
