@@ -6,7 +6,11 @@
   </div>
   <hr/>
   <div class="large-10 columns">
-    <table id="subscriptions"> 
+      <%= fields_for :search do%>
+        <%= label_tag :search %>
+        <%= text_field_tag :search %>
+      <% end %>
+    <table id="table"> 
     <thead>
       <tr>
         <th>Order Quantity</th>

@@ -5,7 +5,11 @@
     <%= hidden_field_tag(:subscriber_id, @subscriber.id) %>
     
     <div class="large-10 columns">
-      <table id="books"> 
+      <%= fields_for :search do%>
+        <%= label_tag :search %>
+        <%= text_field_tag :search %>
+      <% end %>
+      <table id="table"> 
       <thead>
         <tr>
           <th>Title</th>
