@@ -17,8 +17,10 @@ class BookSubscribersController < ApplicationController
   end
   
   def create
-    params[:q].each do |subscriber, quantity|
-      @book.subscribers_books.create(subscriber_id: subscriber, quantity: quantity) unless quantity.empty? || quantity == "0"
+    if !params[:q].nil?
+      params[:q].each do |subscriber, quantity|
+        @book.subscribers_books.create(subscriber_id: subscriber, quantity: quantity) unless quantity.empty? || quantity == "0"
+      end
     end
     redirect_to session[:request_page]
   end

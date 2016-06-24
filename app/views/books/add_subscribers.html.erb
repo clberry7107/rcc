@@ -1,14 +1,13 @@
 <div class="large-12 columns">
   <h2>Add subscribers for <%= @book.title %></h2>
   <div>
-    <%= form_tag("/book_subscribers/create", method: :post) do %>
-    <%= hidden_field_tag(:id, @book.id) %>
-    
     <div class="large-10 columns">
       <%= fields_for :search do%>
         <%= label_tag :search %>
         <%= text_field_tag :search %>
       <% end %>
+    <%= form_tag("/book_subscribers/create", method: :post) do %>
+    <%= hidden_field_tag(:id, @book.id) %>
       <table class="search_table">
         <thead>
         <tr>
@@ -20,16 +19,17 @@
         <% @subscribers.each do |subscriber| %>
           <tr>
             <td><%= subscriber.full_name %></td>
-            <td><%= label_tag(:q, "Quantity:") %>
-                <%= number_field(:q, subscriber.id, :step => 1, :min => 0 ) %></td>
+            <td><%= label_tag(:q, "Quantity:") %></td>
+            <td><%= number_field(:q, subscriber.id, :step => 1, :min => 0 ) %></td>
           </tr>
         <% end %>
         </tbody>
       </table>  
     </div>
     <div class="large-2 columns">
-      <%= submit_tag  "Add Subscribers", :class => "button success" %>
+      <%= submit_tag  "Add Subscribers", :class => "button success clean" %>
     </div>
   <% end %>
   </div>
+  <div><%= button_to "View Additions", "", :class => "button warning consolidate" %></div>
 </div>

@@ -13,8 +13,10 @@ class SubscriptionsController < ApplicationController
   
   def create
     books = Array.new
-    params[:q].each do |k, v|
-      books << {book: k, quantity: v} unless v == "" || v == 0
+    if !params[:q].nil?
+      params[:q].each do |k, v|
+        books << {book: k, quantity: v} unless v == "" || v == 0
+      end
     end
     
     books.each do |book|
