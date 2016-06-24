@@ -1,37 +1,37 @@
 <div class="large-12 columns">
   <h2>Add subscription for <%= @subscriber.full_name %></h2>
-  <div>
-    <%= form_tag("/subscriptions/create", method: "post") do %>
-    <%= hidden_field_tag(:subscriber_id, @subscriber.id) %>
-    
-    <div class="large-10 columns">
-      <%= fields_for :search do%>
-        <%= label_tag :search %>
-        <%= text_field_tag :search %>
-      <% end %>
-      <table class="search_table"> 
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Order Quantity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @books.each do |book| %>
-          <% if !@subscriber.books.exists?(book) %>
+  <div class="large-10 columns">
+    <%= fields_for :search do%>
+      <%= label_tag :search %>
+      <%= text_field_tag :search %>
+    <% end %>
+    <div>
+      <%= form_tag("/subscriptions/create", method: "post") do %>
+        <%= hidden_field_tag(:subscriber_id, @subscriber.id) %>
+        <table class="search_table"> 
+        <thead>
           <tr>
-            <td><%= link_to book.title, book_path(book) %></td>
-            <td><%= label_tag(:q, "Quantity:") %>
-                <%= number_field(:q, book.id, :step => 1, :min => 0 ) %></td>
+            <th>Title</th>
+            <th>Order Quantity</th>
           </tr>
+        </thead>
+        <tbody>
+          <% @books.each do |book| %>
+            <% if !@subscriber.books.exists?(book.id) %>
+            <tr>
+              <td><%= link_to book.title, book_path(book) %></td>
+              <td><%= label_tag(:q, "Quantity:") %></td>
+              <td><%= number_field(:q, book.id, :step => 1, :min => 0) %></td>
+            </tr>
+            <% end %>
           <% end %>
-        <% end %>
-      </tbody>
-      </table>  
+        </tbody>
+        </table> 
     </div>
-    <div class="large-2 columns">
-      <%= submit_tag  "Add Books", :class => "button success" %>
-    </div>
-  <% end %>
   </div>
+  <div class="large-2 columns">
+    <%= submit_tag  "Add Books", :class => "button success clean" %>
+  </div>
+      <% end %>
+  <div><%= button_to "View Additions", "", :class => "button warning consolidate" %></div>
 </div>

@@ -21,7 +21,7 @@
       <% @subscriber.books.where('active = ? ', :true).order(:title).each do |book| %>
         <tr>
           <td><%= label_tag(:q, "Quantity:") %>
-              <%= number_field(:q, book.id, :step => 1, :min => 0, :value => @subscriber.book_quantity(book)) %></td>
+              <td><%= number_field(:q, book.id, :step => 1, :min => 0, :value => @subscriber.book_quantity(book)) %></td>
           <td><%= link_to book.title, book_path(book) %></td>
       <% end %>
     </tbody>
