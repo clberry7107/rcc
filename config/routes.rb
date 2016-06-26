@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   post 'subscriptions/update' => 'subscriptions#update'
   post 'subscriptions/add' => 'subscriptions#new'
   post 'subscriptions/create' => 'subscriptions#create'
+  post 'subscriptions/combine' => 'subscriptions#combine'
+  
   post 'subscriber/edit_subscriptions' =>'subscribers#edit_subscriptions'
   
   get 'book_subscribers/index' => 'book_subscribers#index'

@@ -11,6 +11,11 @@ class SubscriptionsController < ApplicationController
     render 'subscribers/add_subscription'
   end
   
+  def combine
+    @subscribers = Subscriber.all.order('last_name')
+    render 'subscribers/merge_subscriptions'
+  end
+  
   def create
     books = Array.new
     if !params[:q].nil?
@@ -41,6 +46,10 @@ class SubscriptionsController < ApplicationController
     end
     
     redirect_to session[:request_page]
+  end
+  
+  def merge
+    
   end
   
   def destroy

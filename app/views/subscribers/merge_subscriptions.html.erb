@@ -1,0 +1,30 @@
+<h1>Merge Subscriptions</h1>
+<h2><%= @subscriber.full_name %></h2>
+<h2><%= @subscribers.count %></h2>
+  <div>
+    <h2> Other Subscribers</h2>
+      <div class="large-10 columns">
+    <%= fields_for :search do%>
+      <%= label_tag :search %>
+      <%= text_field_tag :search %>
+    <% end %>
+    <div>
+      <%= form_tag("/subscriptions/merge", method: "post") do %>
+      <table class="search_table"> 
+        <tr>
+          <th>Merge with:</th>
+          <th>Name</th></th>
+          <th>Book Quantity</th>
+        </tr>
+        <% @subscribers.each do |subscriber| %>
+        <% if @subscriber.id != subscriber.id %>
+          <tr>
+            <td><%= radio_button_tag(:selected, "Select") %></td>
+            <td><%= subscriber.full_name %></td>
+            <td><%= subscriber.subscribers_books.count %></td>
+          </tr>
+        <% end %>
+        <% end %>
+      </table>
+      <% end %>
+    </div>

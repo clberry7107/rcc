@@ -7,6 +7,7 @@
       <%= button_to 'Edit Details', edit_subscriber_path(@subscriber),method: :get, :class => "button info" %>
       <%= button_to "Edit Subscriptions", subscriber_edit_subscriptions_path(:id => @subscriber.id), :class => "button info" %>
       <%= button_to "Add Books", {:controller => "subscriptions", :action => "new", :subscriber => @subscriber.id}, :class => "button info" %>
+      <%= button_to "Merge Subscriptions", subscriptions_combine_path(:subscriber => @subscriber.id), :class => "button info" %>
     </div>
     <div class="button-group">
       <%= button_to "<< Previous", subscriber_path(@subscriber.previous_subscriber), :method => :get, :class => "button success" %> 
