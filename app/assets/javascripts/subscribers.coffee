@@ -17,8 +17,8 @@ jQuery ->
   $('.consolidate').click (e) ->
     consolidate(e)
     
-  $('.clear').click (e) ->
-    show_selected(e)
+  # $('.clear').click (e) ->
+  #   show_selected(e)
     
   $('#inp').on('keydown', onlyNumbers)
 
@@ -70,20 +70,20 @@ consolidate = (e) ->
           $(row).fadeIn()
   e.preventDefault()
   
-  show_selected = (e) ->
-  # alert "Consolidating"
-  table = $('.search_table')
-  table.find('tr').each (index, row) ->
-    if index != 0
-      allCells = $(row).find('td')
-      allCells.each (cell, td) ->
-        if cell == 0
-          selected = $(td).children(0).val()
-        if selected == 1
-          $(row).fadeOut()
-        else
-          $(row).fadeIn()
-  e.preventDefault()
+# show_selected = (e) ->
+#   # alert "Consolidating"
+#   table = $('.search_table')
+#   table.find('tr').each (index, row) ->
+#     if index != 0
+#       allCells = $(row).find('td')
+#       allCells.each (cell, td) ->
+#         if cell == 0
+#           selected = $(td).children(0).val()
+#         if selected == 1
+#           $(row).fadeOut()
+#         else
+#           $(row).fadeIn()
+#   e.preventDefault()
     
   
 onlyNumbers = (evt) ->

@@ -9,7 +9,6 @@
           <%= label_tag :search %>
           <%= text_field_tag :search %>
         <% end %>
-      </div>
       <div>
         <%= form_tag("/book_subscribers/merge", method: "post") do %>
           <%= hidden_field_tag(:id, @book.id) %>
