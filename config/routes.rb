@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   post 'book_subscribers/edit' => 'book_subscribers#edit'
   post 'book_subscribers/create' => 'book_subscribers#create'
   post 'book_subscribers/update' => 'book_subscribers#update'
+  post 'book_subscribers/combine' => 'book_subscribers#combine'
+  post 'book_subscribers/merge' => 'book_subscribers#merge'
+  
   
   
   resources :fulfillment

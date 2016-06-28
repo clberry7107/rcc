@@ -16,6 +16,11 @@ class BookSubscribersController < ApplicationController
     render 'books/edit_subscribers'
   end
   
+  def combine
+    @books = Book.all.order('title')
+    render 'books/merge_subscriptions'
+  end
+  
   def create
     if !params[:q].nil?
       params[:q].each do |subscriber, quantity|
@@ -40,6 +45,32 @@ class BookSubscribersController < ApplicationController
     end
     
     redirect_to session[:request_page]
+  end
+  
+  def merge
+    @selected = Book.find(params[:selected])
+    
+    @book.subscribers_books.each do |subscription|
+      if @selected.subscribers_books.find_by(subscriber_id: subscription.subscriber_id).nil?
+        sb = SubscribersBook.new
+        sb.subscriber_id = subscription.subscriber.id
+        sb.book_id = @selected.id
+        sb.quantity = subscription.quantity
+        sb.save
+      end
+    end
+    
+    @selected.subscribers_books.each do |subscription|
+      if @book.subscribers_books.find_by(subscriber_id: subscription.subscriber_id).nil?
+        sb = SubscribersBook.new
+        sb.subscriber_id = subscription.subscriber_id
+        sb.book_id =  @book.id
+        sb.quantity = subscription.quantity
+        sb.save
+      end
+    end
+    
+    redirect_to book_path(@book)
   end
 
   def destroy
