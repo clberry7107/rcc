@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   post 'subscriptions/add' => 'subscriptions#new'
   post 'subscriptions/create' => 'subscriptions#create'
   post 'subscriptions/combine' => 'subscriptions#combine'
+  post 'subscriptions/merge' => 'subscriptions#merge'
   
   post 'subscriber/edit_subscriptions' =>'subscribers#edit_subscriptions'
   
