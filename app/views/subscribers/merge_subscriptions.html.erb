@@ -28,7 +28,7 @@
               <% end %>
             <% end %>
           </table>
-          <%= submit_tag  "Merge Subscriptions", :class => "button success clear" %>
+          <%= submit_tag  "Merge Subscriptions", :class => "button success clear", :data => {:confirm => "This will combine #{@subscriber.full_name} with the selected subscriber.\nAre you sure?"} %>
         <% end %>
       </div>
     </div>

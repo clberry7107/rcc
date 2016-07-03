@@ -30,7 +30,8 @@ class SubscribersController < ApplicationController
   # GET /subscribers/1
   # GET /subscribers/1.json
   def show
-        
+    respond_to :html, :json
+  
   end
 
   # GET /subscribers/new

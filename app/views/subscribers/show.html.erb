@@ -11,11 +11,11 @@
     </div>
     <div class="button-group">
       <%= button_to "<< Previous", subscriber_path(@subscriber.previous_subscriber), :method => :get, :class => "button success" %> 
-      <%= button_to "Next >>", subscriber_path(@subscriber.next_subscriber), :method => :get, :class => "button success" %>
+      <%= button_to "Next >>", subscriber_path(@subscriber.next_subscriber), :method => :get, remote: true, :class => "button success" %>
     </div>
     <h1>Subscriber Details</h1>
   <div>
-    <table>
+    <table id="subscriber">
       <tr>
         <td>Name</td>
         <td><%= @subscriber.full_name %></td>
