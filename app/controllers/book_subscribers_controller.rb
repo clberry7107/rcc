@@ -48,29 +48,33 @@ class BookSubscribersController < ApplicationController
   end
   
   def merge
-    @selected = Book.find(params[:selected])
+    if params[:selected]
+      @selected = Book.find(params[:selected])
     
-    @book.subscribers_books.each do |subscription|
-      if @selected.subscribers_books.find_by(subscriber_id: subscription.subscriber_id).nil?
-        sb = SubscribersBook.new
-        sb.subscriber_id = subscription.subscriber.id
-        sb.book_id = @selected.id
-        sb.quantity = subscription.quantity
-        sb.save
+      @book.subscribers_books.each do |subscription|
+        if @selected.subscribers_books.find_by(subscriber_id: subscription.subscriber_id).nil?
+          sb = SubscribersBook.new
+          sb.subscriber_id = subscription.subscriber.id
+          sb.book_id = @selected.id
+          sb.quantity = subscription.quantity
+          sb.save
+        end
       end
-    end
-    
-    @selected.subscribers_books.each do |subscription|
-      if @book.subscribers_books.find_by(subscriber_id: subscription.subscriber_id).nil?
-        sb = SubscribersBook.new
-        sb.subscriber_id = subscription.subscriber_id
-        sb.book_id =  @book.id
-        sb.quantity = subscription.quantity
-        sb.save
+      
+      @selected.subscribers_books.each do |subscription|
+        if @book.subscribers_books.find_by(subscriber_id: subscription.subscriber_id).nil?
+          sb = SubscribersBook.new
+          sb.subscriber_id = subscription.subscriber_id
+          sb.book_id =  @book.id
+          sb.quantity = subscription.quantity
+          sb.save
+        end
       end
+      
+      redirect_to book_path(@book)
+    else
+      redirect_to book_path(@book), notice: "No book was selected.  No merge occured."
     end
-    
-    redirect_to book_path(@book)
   end
 
   def destroy
