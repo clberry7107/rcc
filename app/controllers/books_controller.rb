@@ -25,18 +25,15 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
+    
     @search = Book.search(params[:q])
     @search.sorts = 'title asc'
     @books = @search.result
     @total_books = Book.count
-    # case params[:q[:active]]
-    #   when 0
-    #     @books = @search.where(:active => true)
-    #   when 1
-    #     @books = @search.where(:active => false)
-    #   # else
-    #   #   @books = Book.all.order("LOWER(title)")
-    # end
+    
+    @books = @books.paginate(:page => params[:page], :per_page => 10)
+   
+   
   end
 
   # GET /books/1

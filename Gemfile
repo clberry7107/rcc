@@ -31,6 +31,8 @@ gem 'access-granted', '~> 1.0.0'
 gem 'ransack'
 # Used for client side datatables
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+# Used to speed up index views
+gem 'will_paginate', '~> 3.1.0'
 
 group :development do
   # Use sqlite3 as the database for Active Record

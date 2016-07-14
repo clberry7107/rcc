@@ -69,5 +69,11 @@
         <% end %>
         </tbody>
   </table>
+  <div class="flickr_pagination">
+    <div class="page_info">
+      <%= page_entries_info @posts %>
+    </div>
+    <%= will_paginate @books, :container => false %>
+  </div>
 </div>
 

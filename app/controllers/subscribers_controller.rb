@@ -25,6 +25,8 @@ class SubscribersController < ApplicationController
     @search.sorts = "last_name asc"
     @subscribers = @search.result
     @total_subscribers = Subscriber.count
+    
+    @subscribers = @subscribers.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /subscribers/1
