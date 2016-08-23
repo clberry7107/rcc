@@ -1,5 +1,14 @@
-<tr>
-  <th>Subscriber</th>
-  <th>Quantity</th>
-  <th>Books</th>
-</tr>
+<div>
+  <table>
+    <tr>
+      <th>Subscriber</th>
+      <th>Quantity</th>
+      <th>Books</th>
+    </tr>
+    <% @subscribers.each do |subscriber| %>
+      <% @subscriber = subscriber %>
+      <%= render partial: 'fulfillment/bysubscriber', object: @subscriber %>
+    <% end %>
+  </table>
+</div>
+      

@@ -71,8 +71,14 @@ class SubscribersController < ApplicationController
   def update
     
     if params[:reactivate] == "true"
-      @subscriber.active = true
+      @subscriber.active = "true"
       @subscriber.save
+      
+      @subscriber.subscribers_books.each do |sb|
+        sb.quantity = 1
+        sb.save
+      end
+      
 
       redirect_to subscribers_path, notice: 'Subscriber has been reactivated.'
       return

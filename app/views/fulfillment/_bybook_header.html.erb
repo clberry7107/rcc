@@ -1,5 +1,13 @@
-<tr>
-  <th>Book Title</th>
-  <th>Quantity</th>
-  <th>Subscribers</th>
-</tr>
+<div>
+        <table>
+          <tr>
+            <th>Book Title</th>
+            <th>Quantity</th>
+            <th>Subscribers</th>
+          </tr>
+          <% @books.each do |book| %>
+            <% @book = book %>
+            <%= render partial: 'fulfillment/bybook', object: @book %>
+          <% end %>
+      </table>
+    </div>

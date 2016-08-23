@@ -2,37 +2,14 @@
   <div>
     <h3>Order Fulfillment</h3>
   </div>
-  <div>
-    <br>
-    <h6>There are <%= @subscribers.count %> subscribers getting <%= @books.count %> unique books.</h6>
-    <h6>Total book count: <%= @total_copies %></h6>
-    <h6>Average book count per active customer: <%= @average %></h6>
+  <div class="button-group">
+    <%= button_to 'by Subscriber', fulfillment_index_path("subscriber"), method: :get, :class => "button info" %>
+    <%= button_to 'by Book', fulfillment_index_path("book"), method: :get, :class => "button info" %>
   </div>
   <hr/>
-  <div>
-    <ul class="tabs" data-tabs id="fulfillment-tabs">
-      <li class="tabs-title is-active"><a href="#bybook" aria-selected="true">By Book</a></li>
-      <li class="tabs-title"><a href="#bysubscriber">By Subscriber</a></li>
-    </ul>
-    <div class="tabs-content" data-tabs-content="fulfillment-tabs">
-      <div class="tabs-panel is-active" id="bybook">
-        <table>
-          <%= render 'fulfillment/bybook_header' %>
-          <% @books.each do |book| %>
-            <% @book = book %>
-            <%= render partial: 'fulfillment/bybook', object: @book %>
-          <% end %>
-      </table>
-    </div>
-      <div class="tabs-panel" id="bysubscriber">
-        <table>
-          <%= render 'fulfillment/bysubscriber_header' %>
-          <% @subscribers.each do |subscriber| %>
-            <% @subscriber = subscriber %>
-            <%= render partial: 'fulfillment/bysubscriber', object: @subscriber %>
-          <% end %>
-        </table>
-      </div>
-    </div>
-  </div>
+  <% if @format == "book" %>
+    <%= render "fulfillment/bybook_header", object: @books %>
+  <% elsif @format == "subscriber" %> 
+    <%= render "fulfillment/bysubscriber_header", object: @subscribers %>
+  <% end %>
 </div>
