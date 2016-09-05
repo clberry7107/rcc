@@ -42,7 +42,7 @@
     <% @subscribers.each do |subscriber| %>
       <tr>
         <td><%= link_to subscriber.full_name || "", subscriber_path(subscriber) %></td>
-        <td><%= link_to subscriber.email || "", subscriber_path(subscriber) %></td>
+        <td><%= mail_to subscriber.email || "", subscriber.email %></td>
         <td>
           <ul><% subscriber.phone_numbers.each do |number| %>
             <li><%= number %></li>
