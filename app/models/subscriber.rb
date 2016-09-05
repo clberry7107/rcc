@@ -146,6 +146,13 @@ class Subscriber < ActiveRecord::Base
     return total
   end
   
+  def phone_numbers
+    n = Array.new
+    n << "h: #{f_home_phone}"
+    n << "m: #{f_mobile_phone}"
+    n << "w: #{f_work_phone}"
+    
+  end
   
   
 end

@@ -36,22 +36,18 @@
   <table> 
     <tr>
       <th>Name</th>
-      <th>Active?</th>
       <th>Email</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip</th>
+      <th>Phone</th>
     </tr>
     <% @subscribers.each do |subscriber| %>
       <tr>
         <td><%= link_to subscriber.full_name || "", subscriber_path(subscriber) %></td>
-        <td><%= subscriber.active ? "Active" : "Suspended"%></td>
         <td><%= link_to subscriber.email || "", subscriber_path(subscriber) %></td>
-        <td><%= link_to subscriber.address || "", subscriber_path(subscriber) %></td>
-        <td><%= link_to subscriber.city || "", subscriber_path(subscriber) %></td>
-        <td><%= link_to subscriber.state || "", subscriber_path(subscriber) %></td>
-        <td><%= link_to subscriber.f_zip || "", subscriber_path(subscriber) %></td>
+        <td>
+          <ul><% subscriber.phone_numbers.each do |number| %>
+            <li><%= number %></li>
+          <% end %></ul>
+        </td>
         <% if subscriber.books.count > 0 %>
           <td><%= button_to "Edit Subscriptions", subscriber_edit_subscriptions_path(:id => subscriber.id), :class => "button info" %></td>
         <% else %>
