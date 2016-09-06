@@ -1,7 +1,6 @@
 <div class="row">
   <h2>Current Order Count</h2>
-  <h3>Book Titles: <%= @books.count %></h3>
-  <h3>Total Books: <%= @total_quantity %></h3>
+  <h3>Book Titles: <%= @book_count %> ................Total Books: <%= @total_quantity %></h3>
   <div class="row">
     <div class="large-10 columns">
       <%= fields_for :search do%>
@@ -15,6 +14,7 @@
         <th>Subscriptions</th>
         <th>Stock</th>
         <th>Total</th>
+        <th>Suspend?</th>
         <th>Notes</th>
       </tr>
     </thead>
@@ -25,8 +25,25 @@
         <td><%= @sub = book.subscribers_books.sum(:quantity) || 0%></td>
         <td><%= @store = book.stock_quantity || 0 %></td>
         <td><%= book.order_quantity %></td>
+        <% if can? :suspend, Book %>
+            <% if book.active %>
+              <td><%= button_to "Suspend Book" , book_path(book), 
+                      :method => :delete, :data => {:confirm => "This will make #{book.title} inactive.\nAre you sure?"},
+                      :class => "button warning" %></td>
+            <% else %>
+              <td><%= button_to "Activate Book" , book_path(book, {:book => {:active => true}, :reactivate => true}), 
+                      :method => :patch, :data => {:confirm => "This will make #{book.title} active.\nAre you sure?"},
+                      :class => "button info" %></td>
+            <% end %>
+          <% end %>
         <td><%= book.notes %></td>
       </tr>
     <% end %>
   </table>
+  <div class="flickr_pagination">
+    <div class="page_info">
+      <%= page_entries_info @posts %>
+    </div>
+    <%= will_paginate @books, :container => false %>
+  </div>
 </div>

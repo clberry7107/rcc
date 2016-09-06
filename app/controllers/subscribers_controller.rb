@@ -20,6 +20,7 @@ class SubscribersController < ApplicationController
   # GET /subscribers
   # GET /subscribers.json
   def index
+    session[:request_page] = subscribers_path
     authorize! :view, @user
     @search = Subscriber.search(params[:q])
     @search.sorts = "last_name asc"
@@ -33,7 +34,7 @@ class SubscribersController < ApplicationController
   # GET /subscribers/1.json
   def show
     respond_to :html, :json
-  
+    session[:request_page] = subscriber_path(@subscriber)
   end
 
   # GET /subscribers/new
@@ -80,7 +81,7 @@ class SubscribersController < ApplicationController
       end
       
 
-      redirect_to subscribers_path, notice: 'Subscriber has been reactivated.'
+      redirect_to session[:request_page], notice: 'Subscriber has been reactivated.'
       return
     end
     
@@ -104,7 +105,7 @@ class SubscribersController < ApplicationController
   def destroy
     @subscriber.update(active: :false)
     respond_to do |format|
-      format.html { redirect_to subscribers_url, notice: 'Subscriber is now inactive.' }
+      format.html { redirect_to session[:request_page], notice: 'Subscriber is now inactive.' }
       format.json { head :no_content }
     end
     @subscriber.subscribers_books.each do |subscription|
