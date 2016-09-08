@@ -2,78 +2,82 @@
   <p id="notice"><%= notice %></p>
 </div>
 <div class="row">
-  <h2>Current Book List</h2>
-  <div class="row">
-    <div class="large-3 column">
-      <h6>Total Books: <%= @total_books %></h6>
+  <div class="large-2 column">
+    <div>
+      <h4>Current Book List</h4>
+    </div>
+    <div>
       <% if can? :add_book %>
-        <h6><%= button_to "Add Book", new_book_path, method: :get, class: "button success" %> </h6>
+        <%= button_to "Add Book", new_book_path, method: :get, class: "button success" %>
       <% end %>
     </div>
-  </div>
-  <div class="row">
-    <div class="large-5 column">
-      <h4>Search for book</h4>
-      <div class="row">
-        <%= search_form_for @search do |f| %>
-        <div class="large-4 column">
-          <%= f.label :title_cont, "Title Contains" %>
-        </div>
-        <div class="large-6 column">
-          <%= f.text_field :title_cont %>
-          Search results: <%= @books.count %> Books
-        </div>
-        <div class="large-1 column">
-          <%= f.submit "Search", :class => "button success" %>
-        </div>
-        <% end %>
+    <div>
+      <h6>  Total books: <%= @total_books %></h6>
+    </div>
+    <hr/>
+    <div>
+      <h5>Search for book</h5>  
+    </div>
+    <%= search_form_for @search do |f| %>
+      <div>
+        <%= f.label :title_cont, "Title Contains" %>
       </div>
-    </div>
+      <div>
+        <%= f.text_field :title_cont %>
+      </div>
+      <div>
+        <%= f.submit "Search", :class => "button success" %>
+      </div>
+      <div>
+        Search results: <%= @books.count %> Books
+      </div>
+    <% end %>
   </div>
-  <table> 
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Stock Quantity</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>Active?</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @books.each do |book| %>
+  <div class="large-10 column">
+    <table> 
+      <thead>
         <tr>
-          <td><%= link_to book.title, book_path(book) %></td>
-          <td><%= book.stock_quantity %></td>
-          <td><%= button_to "Change Stock Quantity", edit_book_path(book), class: "button info", method: :get %></td>
-          <td><%= button_to "Add Subscribers", book_subscribers_add_path(:id => book.id), class: "button info" %></td>
-          <% if book.subscribers.count > 0 %>
-            <td><%= button_to "Edit Subscribers", book_subscribers_edit_path(id: book.id), class: "button info" %></td>
-          <% else %>
-            <td></td>  
-          <% end %>
-          <% if can? :suspend, Book %>
-            <% if book.active %>
-              <td><%= button_to "Suspend Book" , book_path(book), 
-                      :method => :delete, :data => {:confirm => "This will make #{book.title} inactive.\nAre you sure?"},
-                      :class => "button warning" %></td>
+          <th>Title</th>
+          <th>Stock Quantity</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>Active?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @books.each do |book| %>
+          <tr>
+            <td><%= link_to book.title, book_path(book) %></td>
+            <td><%= book.stock_quantity %></td>
+            <td><%= button_to "Change Stock Quantity", edit_book_path(book), class: "button info", method: :get %></td>
+            <td><%= button_to "Add Subscribers", book_subscribers_add_path(:id => book.id), class: "button info" %></td>
+            <% if book.subscribers.count > 0 %>
+              <td><%= button_to "Edit Subscribers", book_subscribers_edit_path(id: book.id), class: "button info" %></td>
             <% else %>
-              <td><%= button_to "Activate Book" , book_path(book, {:book => {:active => true}, :reactivate => true}), 
-                      :method => :patch, :data => {:confirm => "This will make #{book.title} active.\nAre you sure?"},
-                      :class => "button info" %></td>
+              <td></td>  
             <% end %>
+            <% if can? :suspend, Book %>
+              <% if book.active %>
+                <td><%= button_to "Suspend Book" , book_path(book), 
+                        :method => :delete, :data => {:confirm => "This will make #{book.title} inactive.\nAre you sure?"},
+                        :class => "button warning" %></td>
+              <% else %>
+                <td><%= button_to "Activate Book" , book_path(book, {:book => {:active => true}, :reactivate => true}), 
+                        :method => :patch, :data => {:confirm => "This will make #{book.title} active.\nAre you sure?"},
+                        :class => "button info" %></td>
+              <% end %>
+            <% end %>
+            </tr>
           <% end %>
-   
-          </tr>
-        <% end %>
-        </tbody>
-  </table>
-  <div class="flickr_pagination">
-    <div class="page_info">
-      <%= page_entries_info @posts %>
+          </tbody>
+    </table>
+    <div class="flickr_pagination">
+      <div class="page_info">
+        <%= page_entries_info @posts %>
+      </div>
+      <%= will_paginate @books, :container => false %>
     </div>
-    <%= will_paginate @books, :container => false %>
   </div>
 </div>
 

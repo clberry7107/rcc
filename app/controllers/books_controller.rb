@@ -10,28 +10,35 @@ class BooksController < ApplicationController
   end
   
   def order_count
-    @books = Array.new
+    session[:request_page] = 'books/order_count'
     @total_quantity = 0
     
-    Book.order("LOWER(title)").all.each do |book|
-      @books << book unless book.subscribers.count == 0 || book.active == false
-    end
+    # @books = Array.new
+    # Book.order("LOWER(title)").all.each do |book|
+    #   @books << book unless book.subscribers.count == 0 || book.active == false
+    # end
+    
+    @books = Book.where("active = ? OR active = ?", true, :true).joins(:subscribers_books).group(:book_id).having('count(book_id)> ?', 0).order("LOWER(title)")
     
     @books.each do |book|
       @total_quantity += book.order_quantity
     end
+    @book_count = @books.count.count
+    @search = @books.search(params[:q])
+    @books = @search.result
+    @books = @books.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /books
   # GET /books.json
   def index
-    
+    session[:request_page] = books_path
     @search = Book.search(params[:q])
     @search.sorts = 'title asc'
     @books = @search.result
     @total_books = Book.count
     
-    @books = @books.paginate(:page => params[:page], :per_page => 10)
+    @books = @books.paginate(:page => params[:page], :per_page => 5)
    
    
   end
@@ -39,7 +46,7 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-    
+    session[:request_page] = book_path(@book)
   end
 
   # GET /books/new
@@ -98,12 +105,12 @@ class BooksController < ApplicationController
   def destroy
     if @book.update(active: :false)
       respond_to do |format|
-        format.html { redirect_to books_url, notice: "#{@book.title} has been marked inactive." }
+        format.html { redirect_to session[:request_page], notice: "#{@book.title} has been marked inactive." }
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html { redirect_to book_url, notice: 'An error occured while updating.  Check book details.' }
+        format.html { redirect_to session[:request_page], notice: 'An error occured while updating.  Check book details.' }
         format.json { head :no_content }
       end
     end
