@@ -18,12 +18,14 @@ class BooksController < ApplicationController
     #   @books << book unless book.subscribers.count == 0 || book.active == false
     # end
     
-    @books = Book.where("active = ? OR active = ?", true, :true).joins(:subscribers_books).group("subscribers_books.book_id").having('count(book_id)> ?', 0).order("LOWER(title)")
+    #@books = Book.where(active: [true, :true]).joins(:subscribers_books).group("subscribers_books.book_id").having('count(book_id)> ?', 0).order("LOWER(title)")
+    #@books = Book.where(active: [true, :true]).order("LOWER(title)")
+    @books = Book.includes("subscribers_books").where(active: [true,:true], subscribers_books: { quantity: 1}).order("LOWER(title)")
     
     @books.each do |book|
       @total_quantity += book.order_quantity
     end
-    @book_count = @books.count.count
+    @book_count = @books.count
     @search = @books.search(params[:q])
     @books = @search.result
     @books = @books.paginate(:page => params[:page], :per_page => 5)

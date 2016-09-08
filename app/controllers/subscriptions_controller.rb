@@ -6,7 +6,7 @@ class SubscriptionsController < ApplicationController
   end
   
   def new
-    @books = Book.all.where("active = ?", :true).order('title ASC')
+    @books = Book.all.where(active: [true, :true]).order('title ASC')
     session[:request_page] = request.env["HTTP_REFERER"] || subscriber_path(@subscriber)
     render 'subscribers/add_subscription'
   end

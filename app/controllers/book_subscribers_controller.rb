@@ -6,7 +6,7 @@ class BookSubscribersController < ApplicationController
   end
   
   def new
-    @subscribers = Subscriber.all.where("active = ?", :true).order('last_name ASC').reject{ |subscriber| @book.subscribers.include?(subscriber)}
+    @subscribers = Subscriber.all.where(active: [true, :true]).order('last_name ASC').reject{ |subscriber| @book.subscribers.include?(subscriber)}
     session[:request_page] = request.env['HTTP_REFERER'] || relationships_path
     render 'books/add_subscribers'
   end
