@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   
   post 'books/import' => 'books#import'
   get 'books/order_count' => 'books#order_count'
+  post 'books/order_count' => 'books#order_count'
   #post 'books' => 'books#index'
   resources :books
   

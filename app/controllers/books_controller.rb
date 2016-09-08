@@ -24,7 +24,9 @@ class BooksController < ApplicationController
       @total_quantity += book.order_quantity
     end
     @book_count = @books.count.count
-    @books = @books.paginate(:page => params[:page], :per_page => 10)
+    @search = @books.search(params[:q])
+    @books = @search.result
+    @books = @books.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /books
@@ -36,7 +38,7 @@ class BooksController < ApplicationController
     @books = @search.result
     @total_books = Book.count
     
-    @books = @books.paginate(:page => params[:page], :per_page => 10)
+    @books = @books.paginate(:page => params[:page], :per_page => 5)
    
    
   end

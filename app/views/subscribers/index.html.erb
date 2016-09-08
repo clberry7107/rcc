@@ -5,77 +5,79 @@
   <p><%= @errors %></p>
 </div>
   <div class="row">
-    <h2>Current Subscribers</h2>
-    <h6>Total Subscribers: <%= @total_subscribers %></h6>
-    <h6><%= button_to "Add Subscriber", new_subscriber_path, :method => :get, class: "button success" %></h6>
-  </div>
-  <div class="row">
-    <h4>Search for Subscriber</h4>
-    <%= search_form_for @search do |f| %>
-    <div class="large-6 column">
-      <%= f.label :first_name_start, "First Name Contains" %>
-      <%= f.text_field :first_name_start %>
-    </div>
-    <div class="large-6 column">
-      <%= f.label :last_name_start, "Last Name Contains" %>
-      <%= f.text_field :last_name_start %>
-    </div>
-  </div>
-  <div class="row">
     <div class="large-2 column">
-      <%= f.submit "Search", :class => "button success" %>
-    </div>
-    <div class=="large-3 column">
-      <h5>Search Total: <%= @subscribers.count %></h5>
-    </div>
-  </div>
-  <% end %>
-  </div>
-</div>
-<div class="row">
-  <table> 
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-    </tr>
-    <% @subscribers.each do |subscriber| %>
-      <tr>
-        <td><%= link_to subscriber.full_name || "", subscriber_path(subscriber) %></td>
-        <td><%= mail_to subscriber.email || "", subscriber.email %></td>
-        <td>
-          <ul><% subscriber.phone_numbers.each do |number| %>
-            <li><%= number %></li>
-          <% end %></ul>
-        </td>
-        <% if subscriber.books.count > 0 %>
-          <td><%= button_to "Edit Subscriptions", subscriber_edit_subscriptions_path(:id => subscriber.id), :class => "button info" %></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <td><%= button_to "Add Books", {:controller => "subscriptions", :action => "new", :subscriber => subscriber.id}, :class => "button info" %></td>
-        <% if can? :suspend, Subscriber %>
-          <% if subscriber.active %>
-            <td><%= button_to "Suspend Subscriber" , subscriber_path(subscriber), 
-                    :method => :delete, :data => {:confirm => "This will make #{subscriber.full_name} inactive and change all subsciption counts to 0.\nAre you sure?"},
-                    :class => "button warning" %></td>
-          <% else %>
-            <td><%= button_to "Activate Subscriber" , subscriber_path(subscriber, {:subscriber => {:active => true}, :reactivate => true}), 
-                    :method => :patch, :data => {:confirm => "This will make #{subscriber.full_name} active and change all subsciption counts to 1.\nAre you sure?"},
-                    :class => "button info" %></td>
-          <% end %>
-        <% end %>
-      </tr>
-      <% end %>
-    </table>
-    </div>
-    <div class="flickr_pagination">
-      <div class="page_info">
-        <%= page_entries_info @posts %>
+      <div>
+        <h4>Current Subscribers</h4>
       </div>
-      <%= will_paginate @subscribers, :container => false %>
+      <div>
+        <h6><%= button_to "Add Subscriber", new_subscriber_path, :method => :get, class: "button success" %></h6>
+      </div>
+      <div>
+        <h6>Total Subscribers: <%= @total_subscribers %></h6>
+      </div>
+      <hr/>
+      <div>
+        <h5>Search for Subscriber</h5>
+      </div>
+      <%= search_form_for @search do |f| %>
+      <div>
+        <%= f.label :first_name_start, "First Name Contains" %>
+        <%= f.text_field :first_name_start %>
+      </div>
+      <div>
+        <%= f.label :last_name_start, "Last Name Contains" %>
+        <%= f.text_field :last_name_start %>
+      </div>
+      <div>
+        <%= f.submit "Search", :class => "button success" %>
+      </div>
+      <div>
+        <h6>Search Total: <%= @subscribers.count %></h6>
+      </div>
+      <% end %>
+    </div>
+    <div class="large-10 column">
+      <table> 
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </tr>
+        <% @subscribers.each do |subscriber| %>
+          <tr>
+            <td><%= link_to subscriber.full_name || "", subscriber_path(subscriber) %></td>
+            <td><%= mail_to subscriber.email || "", subscriber.email %></td>
+            <td>
+              <ul><% subscriber.phone_numbers.each do |number| %>
+                <li><%= number %></li>
+              <% end %></ul>
+            </td>
+            <% if subscriber.books.count > 0 %>
+              <td><%= button_to "Edit Subscriptions", subscriber_edit_subscriptions_path(:id => subscriber.id), :class => "button info" %></td>
+            <% else %>
+              <td></td>
+            <% end %>
+            <td><%= button_to "Add Books", {:controller => "subscriptions", :action => "new", :subscriber => subscriber.id}, :class => "button info" %></td>
+            <% if can? :suspend, Subscriber %>
+              <% if subscriber.active %>
+                <td><%= button_to "Suspend" , subscriber_path(subscriber), 
+                        :method => :delete, :data => {:confirm => "This will make #{subscriber.full_name} inactive and change all subsciption counts to 0.\nAre you sure?"},
+                        :class => "button warning" %></td>
+              <% else %>
+                <td><%= button_to "Activate" , subscriber_path(subscriber, {:subscriber => {:active => true}, :reactivate => true}), 
+                        :method => :patch, :data => {:confirm => "This will make #{subscriber.full_name} active and change all subsciption counts to 1.\nAre you sure?"},
+                        :class => "button info" %></td>
+              <% end %>
+            <% end %>
+          </tr>
+          <% end %>
+        </table>
+        <div class="flickr_pagination">
+          <div class="page_info">
+            <%= page_entries_info @posts %>
+          </div>
+          <%= will_paginate @subscribers, :container => false %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-
