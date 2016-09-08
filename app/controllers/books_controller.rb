@@ -18,7 +18,7 @@ class BooksController < ApplicationController
     #   @books << book unless book.subscribers.count == 0 || book.active == false
     # end
     
-    @books = Book.where("active = ? OR active = ?", true, :true).joins(:subscribers_books).group(:book_id).having('count(book_id)> ?', 0).order("LOWER(title)")
+    @books = Book.where("active = ? OR active = ?", true, :true).joins(:subscribers_books).group("subscribers_books.book_id").having('count(book_id)> ?', 0).order("LOWER(title)")
     
     @books.each do |book|
       @total_quantity += book.order_quantity
