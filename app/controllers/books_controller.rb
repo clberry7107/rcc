@@ -22,7 +22,7 @@ class BooksController < ApplicationController
     @search = @books.search(params[:q])
     @books = @search.result
     if params[:first_letter]
-      @books = Book.where("title LIKE ?", "#{params[:first_letter]}%")
+      @books = @books.where("title LIKE ?", "#{params[:first_letter]}%")
     end
     @books = @books.paginate(:page => params[:page], :per_page => 25)
   end
