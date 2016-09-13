@@ -13,13 +13,6 @@ class BooksController < ApplicationController
     session[:request_page] = 'books/order_count'
     @total_quantity = 0
     
-    # @books = Array.new
-    # Book.order("LOWER(title)").all.each do |book|
-    #   @books << book unless book.subscribers.count == 0 || book.active == false
-    # end
-    
-    #@books = Book.where(active: [true, :true]).joins(:subscribers_books).group("subscribers_books.book_id").having('count(book_id)> ?', 0).order("LOWER(title)")
-    #@books = Book.where(active: [true, :true]).order("LOWER(title)")
     @books = Book.includes("subscribers_books").where(active: [true,:true], subscribers_books: { quantity: 1}).order("LOWER(title)")
     
     @books.each do |book|
@@ -28,7 +21,10 @@ class BooksController < ApplicationController
     @book_count = @books.count
     @search = @books.search(params[:q])
     @books = @search.result
-    @books = @books.paginate(:page => params[:page], :per_page => 5)
+    if params[:first_letter]
+      @books = Book.where("title LIKE ?", "#{params[:first_letter]}%")
+    end
+    @books = @books.paginate(:page => params[:page], :per_page => 25)
   end
 
   # GET /books
@@ -38,11 +34,11 @@ class BooksController < ApplicationController
     @search = Book.search(params[:q])
     @search.sorts = 'title asc'
     @books = @search.result
+    if params[:first_letter]
+      @books = Book.where("title LIKE ?", "#{params[:first_letter]}%")
+    end
     @total_books = Book.count
-    
     @books = @books.paginate(:page => params[:page], :per_page => 5)
-   
-   
   end
 
   # GET /books/1

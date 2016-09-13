@@ -8,7 +8,7 @@
       <%= button_to 'by Book', fulfillment_index_path("book"), method: :get, :class => "button info" %>
     </div>
   </div>
-  <div class="large-2 column">
+  <div class="large-3 column">
     <% if @format == "book" %>
       <div>
         <h5>Search for book</h5>  
@@ -28,8 +28,14 @@
           Search results: <%= @books.count %> Books
         </div>
       <% end %>
+      <div class="button-bar">
+        <% ('a'..'z').each do |letter| %>
+          <%= link_to letter, fulfillment_index_path("book", :first_letter => letter), class: "button" %>
+        <% end %>
+        <%= link_to "A-Z", fulfillment_index_path("book", :first_letter => "a-z"), class: "button" %>
+      </div>
     </div>
-    <div class="large-8 column">
+    <div class="large-7 column">
       <%= render "fulfillment/bybook_header", object: @books %>
     </div>
     <% elsif @format == "subscriber" %> 
@@ -54,7 +60,7 @@
       </div>
       <% end %>
     </div>
-    <div class="large-8 column">
+    <div class="large-7 column">
       <%= render "fulfillment/bysubscriber_header", object: @subscribers %>
     </div>
     <% end %>
