@@ -21,7 +21,7 @@ class FulfillmentController < ApplicationController
           elsif params[:first_letter] == "a-z"
             @books = @books
           else
-            @books = @books.where("title LIKE ?", "#{params[:first_letter]}%")
+            @books = @books.where("title LIKE ? OR title LIKE ?", params[:first_letter].downcase + '%', params[:first_letter].upcase + '%')
           end
         end
         # @books = @books.paginate(:page => params[:page], :per_page => 5)

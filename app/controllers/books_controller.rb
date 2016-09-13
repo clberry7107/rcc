@@ -22,7 +22,7 @@ class BooksController < ApplicationController
     @search = @books.search(params[:q])
     @books = @search.result
     if params[:first_letter]
-      @books = @books.where("title LIKE ?", "#{params[:first_letter]}%")
+      @books = @books.where("title LIKE ? OR title LIKE ?", params[:first_letter].downcase + '%', params[:first_letter].upcase + '%')
     end
     @books = @books.paginate(:page => params[:page], :per_page => 25)
   end
@@ -35,7 +35,7 @@ class BooksController < ApplicationController
     @search.sorts = 'title asc'
     @books = @search.result
     if params[:first_letter]
-      @books = Book.where("title LIKE ?", "#{params[:first_letter]}%")
+      @books = Book.where("title LIKE ? OR title LIKE ?", params[:first_letter].downcase + '%', params[:first_letter].upcase + '%')
     end
     @total_books = Book.count
     @books = @books.paginate(:page => params[:page], :per_page => 5)
