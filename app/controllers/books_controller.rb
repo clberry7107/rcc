@@ -10,7 +10,7 @@ class BooksController < ApplicationController
   end
   
   def order_count
-    session[:request_page] = 'books/order_count'
+    session[:request_page] = '/books/order_count'
     @total_quantity = 0
     
     @books = Book.includes("subscribers_books").where(active: [true,:true], subscribers_books: { quantity: 1}).order("LOWER(title)")
@@ -80,7 +80,7 @@ class BooksController < ApplicationController
       @book.active = true
       @book.save
 
-      redirect_to books_path, notice: "#{@book.title} has been reactivated."
+      redirect_to session[:request_page], notice: "#{@book.title} has been reactivated."
       return
     end
     if params[:commit]
