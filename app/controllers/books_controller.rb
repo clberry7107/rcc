@@ -44,7 +44,6 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-    h
     session[:request_page] = book_path(@book)
   end
 
