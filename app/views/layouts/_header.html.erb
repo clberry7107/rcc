@@ -1,6 +1,4 @@
 <div class="row">
-  <%= image_tag("new_header.jpg", :class => "header") %>
-  <hr/>
   <% if current_user && current_user.can_view? %>
     <ul class="breadcrumbs large-6 columns">
       <li><%= link_to "New Releases", newreleases_path %></li>
@@ -19,7 +17,6 @@
     </ul>
     <%= current_user.email %></br>
     <%= current_user.user_type %>
-    <hr/>
   <% end %>
-  
+  <hr/>
 </div>

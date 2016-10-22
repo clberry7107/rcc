@@ -12,12 +12,13 @@
   </head>
   
   <body>
+    <div class="row">
+      <%= image_tag("new_header.jpg", :class => "header") %>
+    </div>
     <%= render 'layouts/header' %>
     <div class="row">
-      <div class="large-12 columns">
-        <div class="panel">
-          <%= yield %>
-        </div>
+      <div class="panel">
+        <%= yield %>
       </div>
     </div>
     <%= render 'layouts/footer' %>

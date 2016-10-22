@@ -37,6 +37,12 @@
       <% end %>
     </div>
     <div class="large-10 column">
+      <div class="flickr_pagination">
+        <div class="page_info">
+          <%= page_entries_info @posts %>
+        </div>
+        <%= will_paginate @subscribers, :container => false %>
+      </div>
       <table> 
         <tr>
           <th>Name</th>
@@ -72,12 +78,6 @@
           </tr>
           <% end %>
         </table>
-        <div class="flickr_pagination">
-          <div class="page_info">
-            <%= page_entries_info @posts %>
-          </div>
-          <%= will_paginate @subscribers, :container => false %>
-        </div>
       </div>
     </div>
   </div>

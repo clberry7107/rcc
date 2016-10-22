@@ -34,10 +34,17 @@
         <% ('a'..'z').each do |letter| %>
           <%= link_to letter, books_path(:first_letter => letter), class: "button" %>
          <% end %>
+         <%= link_to "All", books_path(), class: "button" %>
       </div>
     <% end %>
   </div>
   <div class="large-9 column">
+    <div class="flickr_pagination">
+      <div class="page_info">
+        <%= page_entries_info @posts %>
+      </div>
+      <%= will_paginate @books, :container => false %>
+    </div>
     <table> 
       <thead>
         <tr>
@@ -76,12 +83,6 @@
           <% end %>
           </tbody>
     </table>
-    <div class="flickr_pagination">
-      <div class="page_info">
-        <%= page_entries_info @posts %>
-      </div>
-      <%= will_paginate @books, :container => false %>
-    </div>
   </div>
 </div>
 
