@@ -10,6 +10,7 @@ class BooksController < ApplicationController
   end
   
   def order_count
+    
     session[:request_page] = '/books/order_count'
     @total_quantity = 0
     
@@ -18,13 +19,16 @@ class BooksController < ApplicationController
     @books.each do |book|
       @total_quantity += book.order_quantity
     end
+    
     @book_count = @books.count
     @search = @books.search(params[:q])
     @books = @search.result
     if params[:first_letter]
       @books = @books.where("title LIKE ? OR title LIKE ?", params[:first_letter].downcase + '%', params[:first_letter].upcase + '%')
+      @first_letter = params[:first_letter]
     end
-    @books = @books.paginate(:page => params[:page], :per_page => 25)
+    @per_page = params[:per_page] || 25
+    @books = @books.paginate(:page => params[:page], :per_page => @per_page)
   end
 
   # GET /books

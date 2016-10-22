@@ -20,8 +20,9 @@
     <% end %>
     <div class="button-bar">
       <% ('a'..'z').each do |letter| %>
-        <%= link_to letter, books_order_count_path(:first_letter => letter), class: "button" %>
+        <%= link_to letter, books_order_count_path(:first_letter => letter, :per_page => @per_page), class: "button" %>
       <% end %>
+      <%= link_to 'All', books_order_count_path(:per_page => @per_page), class: "button" %>
     </div>
   </div>
   <div class="large-9 column">
@@ -29,6 +30,19 @@
       <%= will_paginate @books, :container => false %>
       <div class="page_info">
         <%= page_entries_info @posts %>
+        <div class="row">
+          <%= label_tag :per_page, 'Books per page: ', class: "large-2 column" %>
+          <%= select_tag :per_page, options_for_select([
+                                                        ["Current Count: #{@per_page}", @per_page],
+                                                        ['Handful', 5],
+                                                        ['Quarter', @books.count / 4],
+                                                        ['Half', @books.count / 2],
+                                                        ['All', @books.count]
+                                                        ],
+                                                        params[:per_page].to_i),
+                                                        :onchange => "if(this.value){window.location='?per_page='+this.value+'&first_letter=#{@first_letter}';}",
+                                                        class: "large-10 column" %>
+        </div>
       </div>
     </div>
     <table class="search_table"> 
