@@ -34,11 +34,9 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    
-    session[:request_page] = books_path
     @search = Book.search(params[:q])
-    
     @search.sorts = 'title asc'
+    
     @books = @search.result
     if !params[:first_letter].blank?
       @books = Book.where("title LIKE ? OR title LIKE ?", params[:first_letter].downcase + '%', params[:first_letter].upcase + '%')
@@ -47,6 +45,7 @@ class BooksController < ApplicationController
     @total_books = Book.count
     @per_page = params[:per_page] || 5
     @books = @books.paginate(:page => params[:page], :per_page => @per_page)
+    session[:request_page] = books_path(:first_letter => params[:first_letter], :page => params[:page])
   end
 
   # GET /books/1

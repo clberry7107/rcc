@@ -20,14 +20,15 @@ class SubscribersController < ApplicationController
   # GET /subscribers
   # GET /subscribers.json
   def index
+    
     session[:request_page] = subscribers_path
     authorize! :view, @user
     @search = Subscriber.search(params[:q])
     @search.sorts = "last_name asc"
     @subscribers = @search.result
     @total_subscribers = Subscriber.count
-    
-    @subscribers = @subscribers.paginate(:page => params[:page], :per_page => 5)
+    @per_page = params[:per_page] || 5
+    @subscribers = @subscribers.paginate(:page => params[:page], :per_page => @per_page)
   end
 
   # GET /subscribers/1

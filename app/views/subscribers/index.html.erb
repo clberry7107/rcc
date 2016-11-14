@@ -15,6 +15,9 @@
       <div>
         <h6>Total Subscribers: <%= @total_subscribers %></h6>
       </div>
+      <div>
+        <h6><%= link_to "View All", subscribers_path(:per_page => @total_subscribers), :method => :get, class: "button success" %></h6>
+      </div>
       <hr/>
       <div>
         <h5>Search for Subscriber</h5>
